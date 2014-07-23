@@ -19,8 +19,9 @@ function str = serialize(result)
   str = str(2:end);
 end
 
+function submit(login, passwd, taskStr, result, filename)
 
-function submit(login, passwd, taskStr, result)
+fileStr = fileread(filename)
 
 resultStr = serialize(result);
 URL = 'http://neduchal.cz/zdo/SAKo/index.php';

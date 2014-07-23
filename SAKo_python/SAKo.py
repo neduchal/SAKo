@@ -38,25 +38,28 @@ def serialize( result ):
           resStr = resStr + ';'
   return resStr
           
-def submit(login, passwd, taskStr, result):
+def submit(login, passwd, taskStr, result, filename):
+  
+  with open(filename, 'r') as content_file:
+    content = content_file.read();
   
   resultStr = serialize( result )
-  #Vytvoření parametrů http požadavku
+  #Vytvoreni parametru http pozadavku
   params = urllib.urlencode({'login': login,'passwd': passwd, 'taskStr': taskStr, 'result': resultStr})
-  # Hlavičky http požadavku
+  # Hlavicky http pozadavku
   headers = {"Content-type": "application/x-www-form-urlencoded",
              "Accept": "text/plain"}
-  # Server pro připojení
+  # Server pro pripojeni
   conn = httplib.HTTPConnection("neduchal.cz:80")
-  # Konkrétní požadavek 
+  # Konkretni pozadavek 
   conn.request("POST", "/zdo/index.php", params, headers)
-  # Provedení požadavku
+  # Provedeni pozadavku
   response = conn.getresponse()
   print response.status, response.reason
-  # Zpracování výsledků
+  # Zpracovani vysledku
   data = response.read()
-  # Vypsání délky vrácených dat
+  # Vypsani delky vracenych dat
   print data
-  # Ukončení spojení 
+  # Ukonceni spojeni 
   conn.close()
   pass
