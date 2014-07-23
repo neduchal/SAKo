@@ -6,7 +6,7 @@ end
 function str = serialize(result)
   str = "";
   for i = 1 : size(result, 2);
-      str = [str, '.' result(i).param_name, '#'];
+      str = [str, '%' result(i).param_name, '#'];
       for j = 1 : size(result(i).param_value,1)
         for k = 1 : size(result(i).param_value,2)      
           str = [str, num2str(result(i).param_value(j,k)), ','];
