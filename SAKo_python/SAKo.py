@@ -3,6 +3,8 @@
 # Nacteni knihoven 
 import httplib, urllib
 import numpy as np
+import cv2
+from skimage import io
 
 """
 # Převod matice na string
@@ -38,10 +40,44 @@ def serialize( result ):
           resStr = resStr + ';'
   return resStr
           
-def submit(login, passwd, taskStr, result, filename):
+def submit(login, passwd, taskStr, filename, func_name, parameters):
   
+  m = __import__(taskStr)
+  method = getattr(m, func_name)  
+  #Vytvoreni parametru http pozadavku
+  params = urllib.urlencode({'login': login,'passwd': passwd, 'taskStr': taskStr})
+  # Hlavicky http pozadavku
+  headers = {"Content-type": "application/x-www-form-urlencoded",
+             "Accept": "text/plain"}
+  # Server pro pripojeni
+  conn = httplib.HTTPConnection("localhost:80")
+  # Konkretni pozadavek 
+  conn.request("POST", "/sako/loadData.php", params, headers)
+  # Provedeni pozadavku
+  response = conn.getresponse()
+  #print response.status, response.reason
+  # Zpracovani vysledku
+  data = response.read()  
+  
+  test_data_str = data[6:]
+  test_data_arr = test_data_str.split('##')
+  for i in range(len(test_data_arr)):
+    if i == 0:
+      continue;
+    image = io.imread(test_data_arr[i])
+    image = cv2.cvtColor(image, cv2.cv.CV_RGB2BGR)
+    result[i] = method(image, parameters)
+    
+  result[len(result)].type = 's';
+  result[len(result)].name = 'language';
+  result[len(result)].value = 'python';
+  
+  result[len(result)].type = 's';
+  result[len(result)].name = 'test_package';
+  result[len(result)].value = test_data_arr[0];
+    
   with open(filename, 'r') as content_file:
-    content = content_file.read();
+  content = content_file.read();
   
   resultStr = serialize( result )
   #Vytvoreni parametru http pozadavku
@@ -50,16 +86,16 @@ def submit(login, passwd, taskStr, result, filename):
   headers = {"Content-type": "application/x-www-form-urlencoded",
              "Accept": "text/plain"}
   # Server pro pripojeni
-  conn = httplib.HTTPConnection("neduchal.cz:80")
+  conn = httplib.HTTPConnection("localhost:80")
   # Konkretni pozadavek 
-  conn.request("POST", "/zdo/index.php", params, headers)
+  conn.request("POST", "/sako/index.php", params, headers)
   # Provedeni pozadavku
-  response = conn.getresponse()
-  print response.status, response.reason
+  response = conn.getresponse()  
   # Zpracovani vysledku
   data = response.read()
   # Vypsani delky vracenych dat
   print data
   # Ukonceni spojeni 
+  
   conn.close()
   pass
