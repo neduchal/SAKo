@@ -5,25 +5,14 @@ import httplib, urllib
 import numpy as np
 import cv2
 from skimage import io
-
-"""
-# Převod matice na string
-string = ''
-for i in range(512):
-  for j in range(512):
-    string = string + str(A[i,j])
-    if j < 511: 
-      string = string + ','
-  string = string + ';'
-"""
-
+'''
 def serialize( result ):
   resStr = '';
-  for i in range(len(result)):
-    if i == 0:
-      resStr = resStr + result[i]['name'] + '#'
+  for i in xrange(1,len(result)+1):
+    if i == 1:
+      resStr = resStr + result[i]['name'] + '##'
     else:
-      resStr = resStr + '%' +result[i]['name'] + '#'
+      resStr = resStr + '%' + result[i]['name'] + '##'
     if result[i]['type'] == 's':
       resStr = resStr + result[i]['value']
     elif result[i]['type'] == 'i':
@@ -39,10 +28,33 @@ def serialize( result ):
         if j!= rows-1:
           resStr = resStr + ';'
   return resStr
-          
-def submit(login, passwd, taskStr, filename, func_name, parameters):
+'''          
+
+def serialize( result ):
+  resStr = '';
+  for i in xrange(1,len(result)+1):
+    if i == 1:
+      resStr = resStr + result[i]['name'] + '##'
+    else:
+      resStr = resStr + '%' + result[i]['name'] + '##'
+    if type(result[i]['value']) == str:
+      resStr = resStr + result[i]['value']
+    elif  ((type(result[i]['value']) == int) or (type(result[i]['value']) == float) or (type(result[i]['value']) == long)):
+      resStr = resStr + str(result[i]['value'])
+    elif type(result[i]['value']) == np.ndarray:
+      rows = result[i]['value'].shape[0]
+      cols = result[i]['value'].shape[1]
+      for j in range(rows):
+        for k in range(cols):
+          resStr = resStr + str(result[i]['value'][j,k])
+          if k!= cols-1:
+            resStr = resStr + ','
+        if j!= rows-1:
+          resStr = resStr + ';'
+  return resStr
+def submit(login, passwd, taskStr, filename, func_name):
   
-  m = __import__(taskStr)
+  m = __import__(taskStr + '_func')
   method = getattr(m, func_name)  
   #Vytvoreni parametru http pozadavku
   params = urllib.urlencode({'login': login,'passwd': passwd, 'taskStr': taskStr})
@@ -59,27 +71,47 @@ def submit(login, passwd, taskStr, filename, func_name, parameters):
   # Zpracovani vysledku
   data = response.read()  
   
+  result = {}
+  
   test_data_str = data[6:]
   test_data_arr = test_data_str.split('##')
   for i in range(len(test_data_arr)):
     if i == 0:
       continue;
     image = io.imread(test_data_arr[i])
-    image = cv2.cvtColor(image, cv2.cv.CV_RGB2BGR)
-    result[i] = method(image, parameters)
+    if (len(image.shape) == 3):
+      if(image.shape[2] == 3):
+        image = cv2.cvtColor(image, cv2.cv.CV_RGB2BGR)
+    res = {}    
+    res['value'] = method(image)
+    res['name'] = 'r'+ str(i)
+    result[i] = res
     
-  result[len(result)].type = 's';
-  result[len(result)].name = 'language';
-  result[len(result)].value = 'python';
+  lang = {}
   
-  result[len(result)].type = 's';
-  result[len(result)].name = 'test_package';
-  result[len(result)].value = test_data_arr[0];
+  lang['name']  = 'language'
+  lang['value'] = 'python' 
     
+  result[len(result)+1] = lang;
+  
+  pack = {}
+  
+  pack['name']  = 'test_package'
+  pack['value'] = test_data_arr[0]  
+  
+  result[len(result)+1] = pack;  
+  
   with open(filename, 'r') as content_file:
-  content = content_file.read();
+    content = content_file.read()
+    
+  cont = {}  
+  cont['name']  = 'script'
+  cont['value'] = content
+  
+  result[len(result)+1] = cont;     
   
   resultStr = serialize( result )
+  
   #Vytvoreni parametru http pozadavku
   params = urllib.urlencode({'login': login,'passwd': passwd, 'taskStr': taskStr, 'result': resultStr})
   # Hlavicky http pozadavku
@@ -94,7 +126,7 @@ def submit(login, passwd, taskStr, filename, func_name, parameters):
   # Zpracovani vysledku
   data = response.read()
   # Vypsani delky vracenych dat
-  print data
+  print data[8:]
   # Ukonceni spojeni 
   
   conn.close()
