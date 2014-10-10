@@ -55,13 +55,23 @@ def submit(login, passwd, taskStr, filename, func_name):
   for i in range(len(test_data_arr)):
     if i == 0:
       continue;
-    image = io.imread(test_data_arr[i])
-    if (len(image.shape) == 3):
-      if(image.shape[2] == 3):
-        image = cv2.cvtColor(image, cv2.cv.CV_RGB2BGR)
-    res = {}    
-    res['value'] = method(image)
-    res['name'] = 'r'+ str(i)
+    test_data_split = test_data_arr[i].split('§')  
+    if len(test_data_split) == 1:  
+      image = io.imread(test_data_arr[i])
+      if (len(image.shape) == 3):
+        if(image.shape[2] == 3):
+          image = cv2.cvtColor(image, cv2.cv.CV_RGB2BGR)
+      res = {}    
+      res['value'] = method(image)
+      res['name'] = 'r'+ str(i)
+    else:
+      image = io.imread(test_data_split[0])
+      if (len(image.shape) == 3):
+        if(image.shape[2] == 3):
+          image = cv2.cvtColor(image, cv2.cv.CV_RGB2BGR)
+      res = {}    
+      res['value'] = method(image, test_data_split[1])
+      res['name'] = 'r'+ str(i)     
     result[i] = res
     
   lang = {}
