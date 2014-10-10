@@ -5,30 +5,6 @@ import httplib, urllib
 import numpy as np
 import cv2
 from skimage import io
-'''
-def serialize( result ):
-  resStr = '';
-  for i in xrange(1,len(result)+1):
-    if i == 1:
-      resStr = resStr + result[i]['name'] + '##'
-    else:
-      resStr = resStr + '%' + result[i]['name'] + '##'
-    if result[i]['type'] == 's':
-      resStr = resStr + result[i]['value']
-    elif result[i]['type'] == 'i':
-      resStr = resStr + str(result[i]['value'])
-    elif result[i]['type'] == 'm':
-      rows = result[i]['value'].shape[0]
-      cols = result[i]['value'].shape[1]
-      for j in range(rows):
-        for k in range(cols):
-          resStr = resStr + str(result[i]['value'][j,k])
-          if k!= cols-1:
-            resStr = resStr + ','
-        if j!= rows-1:
-          resStr = resStr + ';'
-  return resStr
-'''          
 
 def serialize( result ):
   resStr = '';
@@ -52,6 +28,7 @@ def serialize( result ):
         if j!= rows-1:
           resStr = resStr + ';'
   return resStr
+  
 def submit(login, passwd, taskStr, filename, func_name):
   
   m = __import__(taskStr + '_func')
@@ -62,7 +39,7 @@ def submit(login, passwd, taskStr, filename, func_name):
   headers = {"Content-type": "application/x-www-form-urlencoded",
              "Accept": "text/plain"}
   # Server pro pripojeni
-  conn = httplib.HTTPConnection("localhost:80")
+  conn = httplib.HTTPConnection("neduchal.cz", 80)
   # Konkretni pozadavek 
   conn.request("POST", "/sako/loadData.php", params, headers)
   # Provedeni pozadavku
@@ -118,7 +95,7 @@ def submit(login, passwd, taskStr, filename, func_name):
   headers = {"Content-type": "application/x-www-form-urlencoded",
              "Accept": "text/plain"}
   # Server pro pripojeni
-  conn = httplib.HTTPConnection("localhost:80")
+  conn = httplib.HTTPConnection("neduchal.cz", 80)
   # Konkretni pozadavek 
   conn.request("POST", "/sako/index.php", params, headers)
   # Provedeni pozadavku
@@ -126,7 +103,7 @@ def submit(login, passwd, taskStr, filename, func_name):
   # Zpracovani vysledku
   data = response.read()
   # Vypsani delky vracenych dat
-  print data[8:]
+  print data
   # Ukonceni spojeni 
   
   conn.close()
