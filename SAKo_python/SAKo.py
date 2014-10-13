@@ -55,7 +55,7 @@ def submit(login, passwd, taskStr, filename, func_name):
   for i in range(len(test_data_arr)):
     if i == 0:
       continue;
-    test_data_split = test_data_arr[i].split('§')  
+    test_data_split = test_data_arr[i].split('&')  
     if len(test_data_split) == 1:  
       image = io.imread(test_data_arr[i])
       if (len(image.shape) == 3):
