@@ -3,7 +3,7 @@ SAKo
 Klient Systému Automatické Kontroly semestrálních prací
 
 * Klient se v současné verzi nachází v beta verzi.
-* Aktuální verze 0.2.2
+* Aktuální verze 0.2.5
 
 Obecné požadavky 
 ----------------

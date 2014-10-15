@@ -113,8 +113,9 @@ def submit(login, passwd, taskStr, filename, func_name):
   # Zpracovani vysledku
   data = response.read()
   # Vypsani delky vracenych dat
+  print 'Stav pripojeni : '
+  print response.status, response.reason
   print data
   # Ukonceni spojeni 
-  
   conn.close()
   pass
