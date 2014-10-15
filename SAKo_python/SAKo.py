@@ -60,7 +60,7 @@ def submit(login, passwd, taskStr, filename, func_name):
       image = io.imread(test_data_arr[i])
       if (len(image.shape) == 3):
         if(image.shape[2] == 3):
-          image = cv2.cvtColor(image, cv2.cv.CV_RGB2BGR)
+          image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
       res = {}    
       res['value'] = method(image)
       res['name'] = 'r'+ str(i)
@@ -68,7 +68,7 @@ def submit(login, passwd, taskStr, filename, func_name):
       image = io.imread(test_data_split[0])
       if (len(image.shape) == 3):
         if(image.shape[2] == 3):
-          image = cv2.cvtColor(image, cv2.cv.CV_RGB2BGR)
+          image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
       res = {}    
       res['value'] = method(image, float(test_data_split[1]))
       res['name'] = 'r'+ str(i)     
