@@ -2,6 +2,10 @@ SAKo
 ====
 Klient Systému Automatické Kontroly semestrálních prací
 
+* Připravuje se verze 0.3
+* Plánované novinky :
+  * Automatické aktualizace při nekompatibitě klienta se serverem z důvodu stáří
+
 * Klient se v současné verzi nachází v beta verzi.
 * Aktuální verze 0.2.6
 * Od verze 0.2.4 není SAKo zpětně kompatibilní s předchozí verzí, doporučuje se aktualizace!
