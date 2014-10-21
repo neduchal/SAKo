@@ -126,7 +126,7 @@ def submit(login, passwd, taskStr, filename, func_name):
     cont['name']  = 'script'
     cont['value'] = content  
     result[len(result)+1] = cont;     
-    # Vztvoreni tzv result stringu  
+    # Vytvoreni tzv result stringu  
     resultStr = serialize( result )
     sendResults(login, passwd, taskStr, resultStr)    
   pass
