@@ -6,7 +6,7 @@ import numpy as np
 import cv2
 from skimage import io
 
-version = 0 * 1000000 + 3 * 1000 + 0 * 1
+version = 0 * 1000000 + 4 * 1000 + 0 * 1
 
 def serialize( result ):
   resStr = '';
@@ -30,6 +30,23 @@ def serialize( result ):
         if j!= rows-1:
           resStr = resStr + ';'
   return resStr
+  
+def getParams(login, passwd, taskStr):
+  #Vytvoreni parametru http pozadavku
+  params = urllib.urlencode({'login': login,'passwd': passwd, 'taskStr': taskStr})
+  # Hlavicky http pozadavku
+  headers = {"Content-type": "application/x-www-form-urlencoded",
+             "Accept": "text/plain"}
+  # Server pro pripojeni
+  conn = httplib.HTTPConnection("neduchal.cz", 80)
+  # Konkretni pozadavek 
+  conn.request("POST", "/sako/loadParams.php", params, headers)
+  # Provedeni pozadavku
+  response = conn.getresponse()
+  # Zpracovani vysledku
+  data = response.read()   
+  conn.close()   
+  return data.lstrip('\r\n')    
   
 def getTestData(login, passwd, taskStr):
   #Vytvoreni parametru http pozadavku
@@ -57,9 +74,9 @@ def handleTestData(data):
   else:
     return data_arr
     
-def sendResults(login, passwd, taskStr, resultStr):
+def sendResults(login, passwd, taskStr, resultStr, script):
   #Vytvoreni parametru http pozadavku
-  params = urllib.urlencode({'login': login,'passwd': passwd, 'taskStr': taskStr, 'result': resultStr, 'version' : version})
+  params = urllib.urlencode({'login': login,'passwd': passwd, 'taskStr': taskStr, 'result': resultStr, 'version' : version, 'script': script})
   # Hlavicky http pozadavku
   headers = {"Content-type": "application/x-www-form-urlencoded",
              "Accept": "text/plain"}
@@ -76,40 +93,77 @@ def sendResults(login, passwd, taskStr, resultStr):
   # Vypsani odpovedi
   print 'Stav pripojeni : '
   print response.status, response.reason
-  print data.lstrip('\r\n')  
-      
+  print data.lstrip('\r\n')
   
+     
+# Submit function  
 def submit(login, passwd, taskStr, filename, func_name):  
   # Nastaveni promennych
   result = {}
   m = __import__(taskStr + '_func')
   method = getattr(m, func_name)  
   # Stazeni a zpracovani testovacich dat
+  sub_par = getParams(login, passwd, taskStr)
   data = getTestData(login, passwd, taskStr)  
   data_arr = handleTestData(data)  
   if(type(data_arr) != str):
-    # Ziskani odezev metody na testovaci data
-    for i in range(len(data_arr)):
-      if i == 0:
-        continue;
-      data_split = data_arr[i].split('&')  
-      if len(data_split) == 1:  
-        image = io.imread(data_arr[i])
-        if (len(image.shape) == 3):
-          if(image.shape[2] == 3):
-            image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+    if(int(sub_par) == 0):
+      # Ziskani odezev metody na testovaci data
+      for i in range(len(data_arr)):
+        if i == 0:
+          continue;
+        data_split = data_arr[i].split('&')  
+        if len(data_split) == 1:  
+          image = io.imread(data_arr[i])
+          if (len(image.shape) == 3):
+            if(image.shape[2] == 3):
+              image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+          res = {}    
+          res['value'] = method(image)
+          res['name'] = 'r'+ str(i)
+        else:
+          image = io.imread(data_split[0])
+          if (len(image.shape) == 3):
+            if(image.shape[2] == 3):
+              image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+          res = {}    
+          res['value'] = method(image, float(data_split[1]))
+          res['name'] = 'r'+ str(i)     
+        result[i] = res  
+    elif (int(sub_par) == 1):
+      Imgs = []
+      ImgsParams = []
+      for i in range(len(data_arr)):
+        if i == 0:
+          continue;
+          data_split = data_arr[i].split('&')           
+          if len(data_split) == 1:  
+            image = io.imread(data_arr[i])
+            if (len(image.shape) == 3):
+              if(image.shape[2] == 3):
+                image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)            
+            Imgs.append(image)              
+          elif:
+            image = io.imread(data_split[0])
+            if (len(image.shape) == 3):
+              if(image.shape[2] == 3):
+                image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR) 
+            Imgs.append(image)        
+            ImgsParams.append(float(data_split[1]))
+               
+      if len(ImgsParams) == 0:
         res = {}    
-        res['value'] = method(image)
-        res['name'] = 'r'+ str(i)
+        res['value'] = method(Imgs)
+        res['name'] = 'r'    
+        result[i] = res  
       else:
-        image = io.imread(data_split[0])
-        if (len(image.shape) == 3):
-          if(image.shape[2] == 3):
-            image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         res = {}    
-        res['value'] = method(image, float(data_split[1]))
-        res['name'] = 'r'+ str(i)     
-      result[i] = res  
+        res['value'] = method(Imgs)
+        res['name'] = 'r'    
+        result[i] = res               
+        
+    else : 
+      print 'Neznamy typ odevzdavaci funkce'
     # Pridani nekolika promennych do posilanych dat  
     lang = {}
     lang['name']  = 'language'
@@ -121,12 +175,8 @@ def submit(login, passwd, taskStr, filename, func_name):
     result[len(result)+1] = pack;  
     # Nacteni uzivatelskeho skriptu a pripojeni k posilanym datum
     with open(filename, 'r') as content_file:
-      content = content_file.read()    
-    cont = {}  
-    cont['name']  = 'script'
-    cont['value'] = content  
-    result[len(result)+1] = cont;     
+      content = content_file.read()     
     # Vytvoreni tzv result stringu  
     resultStr = serialize( result )
-    sendResults(login, passwd, taskStr, resultStr)    
+    sendResults(login, passwd, taskStr, resultStr, content)    
   pass
