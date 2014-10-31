@@ -136,21 +136,20 @@ def submit(login, passwd, taskStr, filename, func_name):
       for i in range(len(data_arr)):
         if i == 0:
           continue;
-          data_split = data_arr[i].split('&')           
-          if len(data_split) == 1:  
-            image = io.imread(data_arr[i])
-            if (len(image.shape) == 3):
-              if(image.shape[2] == 3):
-                image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)            
-            Imgs.append(image)              
-          elif:
-            image = io.imread(data_split[0])
-            if (len(image.shape) == 3):
-              if(image.shape[2] == 3):
-                image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR) 
-            Imgs.append(image)        
-            ImgsParams.append(float(data_split[1]))
-               
+        data_split = data_arr[i].split('&')           
+        if len(data_split) == 1:  
+          image = io.imread(data_arr[i])
+          if (len(image.shape) == 3):
+            if(image.shape[2] == 3):
+              image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)            
+          Imgs.append(image)              
+        else:
+          image = io.imread(data_split[0])
+          if (len(image.shape) == 3):
+            if(image.shape[2] == 3):
+              image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR) 
+          Imgs.append(image)        
+          ImgsParams.append(float(data_split[1]))
       if len(ImgsParams) == 0:
         res = {}    
         res['value'] = method(Imgs)
@@ -158,10 +157,9 @@ def submit(login, passwd, taskStr, filename, func_name):
         result[i] = res  
       else:
         res = {}    
-        res['value'] = method(Imgs)
+        res['value'] = method(Imgs, ImgsParams)
         res['name'] = 'r'    
-        result[i] = res               
-        
+        result[i] = res                     
     else : 
       print 'Neznamy typ odevzdavaci funkce'
     # Pridani nekolika promennych do posilanych dat  
