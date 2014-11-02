@@ -6,7 +6,7 @@ import numpy as np
 import cv2
 from skimage import io
 
-version = 0 * 1000000 + 4 * 1000 + 0 * 1
+version = 0 * 1000000 + 4 * 1000 + 1 * 1
 
 def serialize( result ):
   resStr = '';
@@ -154,12 +154,12 @@ def submit(login, passwd, taskStr, filename, func_name):
         res = {}    
         res['value'] = method(Imgs)
         res['name'] = 'r'    
-        result[i] = res  
+        result[0] = res  
       else:
         res = {}    
         res['value'] = method(Imgs, ImgsParams)
         res['name'] = 'r'    
-        result[i] = res                     
+        result[0] = res                     
     else : 
       print 'Neznamy typ odevzdavaci funkce'
     # Pridani nekolika promennych do posilanych dat  
