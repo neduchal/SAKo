@@ -6,7 +6,7 @@ import numpy as np
 import cv2
 from skimage import io
 
-version = 0 * 1000000 + 4 * 1000 + 1 * 1
+version = 0 * 1000000 + 4 * 1000 + 4 * 1
 
 def serialize( result ):
   resStr = '';
