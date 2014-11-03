@@ -154,12 +154,12 @@ def submit(login, passwd, taskStr, filename, func_name):
         res = {}    
         res['value'] = method(Imgs)
         res['name'] = 'r'    
-        result[0] = res  
+        result[1] = res  
       else:
         res = {}    
         res['value'] = method(Imgs, ImgsParams)
         res['name'] = 'r'    
-        result[0] = res                     
+        result[1] = res                     
     else : 
       print 'Neznamy typ odevzdavaci funkce'
     # Pridani nekolika promennych do posilanych dat  
