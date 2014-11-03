@@ -134,9 +134,9 @@ def submit(login, passwd, taskStr, filename, func_name):
       Imgs = []
       ImgsParams = []
       for i in range(len(data_arr)):
-        print 'Nacitam ' + str(i) + '. obrazek'
         if i == 0:
           continue;
+        print 'Nacitam ' + str(i) + '. obrazek'          
         data_split = data_arr[i].split('&')           
         if len(data_split) == 1:  
           image = io.imread(data_arr[i])
