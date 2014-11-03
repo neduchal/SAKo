@@ -134,6 +134,7 @@ def submit(login, passwd, taskStr, filename, func_name):
       Imgs = []
       ImgsParams = []
       for i in range(len(data_arr)):
+        print 'Nacitam' + i + '. obrazek'
         if i == 0:
           continue;
         data_split = data_arr[i].split('&')           
