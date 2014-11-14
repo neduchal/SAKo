@@ -6,7 +6,7 @@ import numpy as np
 import cv2
 from skimage import io
 
-version = 0 * 1000000 + 4 * 1000 + 4 * 1
+version = 0 * 1000000 + 5 * 1000 + 0 * 1
 
 def serialize( result ):
   resStr = '';
@@ -95,6 +95,34 @@ def sendResults(login, passwd, taskStr, resultStr, script):
   print response.status, response.reason
   print data.lstrip('\r\n')
   
+def imgToImgs(img):
+  Imgs = []
+  for i in range(img.shape[1]/img.shape[0]):
+    Imgs.append(img[:,i*img.shape[0]:(i*img.shape[0])+img.shape[0]])
+  return Imgs  
+  
+def submitFile(login, passwd, taskStr, filename):
+  with open(filename, 'r') as content_file:
+    content = content_file.read()      
+  #Vytvoreni parametru http pozadavku
+  params = urllib.urlencode({'login': login,'passwd': passwd, 'taskStr': taskStr, 'content': content})
+  # Hlavicky http pozadavku
+  headers = {"Content-type": "application/x-www-form-urlencoded",
+             "Accept": "text/plain"}
+  # Server pro pripojeni
+  conn = httplib.HTTPConnection("neduchal.cz", 80)
+  # Konkretni pozadavek 
+  conn.request("POST", "/sako/submitFile.php", params, headers)
+  # Provedeni pozadavku
+  response = conn.getresponse()  
+  # Zpracovani vysledku
+  data = response.read()
+  # Ukonceni spojeni 
+  conn.close() 
+  # Vypsani odpovedi
+  print 'Stav pripojeni : '
+  print response.status, response.reason
+  print data.lstrip('\r\n')     
      
 # Submit function  
 def submit(login, passwd, taskStr, filename, func_name):  
@@ -136,21 +164,28 @@ def submit(login, passwd, taskStr, filename, func_name):
       for i in range(len(data_arr)):
         if i == 0:
           continue;
-        print 'Nacitam ' + str(i) + '. obrazek'          
-        data_split = data_arr[i].split('&')           
-        if len(data_split) == 1:  
+        if len(data_arr) == 2: 
           image = io.imread(data_arr[i])
           if (len(image.shape) == 3):
             if(image.shape[2] == 3):
-              image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)            
-          Imgs.append(image)              
-        else:
-          image = io.imread(data_split[0])
-          if (len(image.shape) == 3):
-            if(image.shape[2] == 3):
-              image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR) 
-          Imgs.append(image)        
-          ImgsParams.append(float(data_split[1]))
+              image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)  
+          Imgs = imgToImgs(image)
+        else:  
+          print 'Nacitam ' + str(i) + '. obrazek'          
+          data_split = data_arr[i].split('&')           
+          if len(data_split) == 1:  
+            image = io.imread(data_arr[i])
+            if (len(image.shape) == 3):
+              if(image.shape[2] == 3):
+                image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)            
+            Imgs.append(image)              
+          else:
+            image = io.imread(data_split[0])
+            if (len(image.shape) == 3):
+              if(image.shape[2] == 3):
+                image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR) 
+            Imgs.append(image)        
+            ImgsParams.append(float(data_split[1]))
       if len(ImgsParams) == 0:
         res = {}    
         res['value'] = method(Imgs)
