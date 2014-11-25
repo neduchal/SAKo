@@ -5,8 +5,12 @@ import httplib, urllib
 import numpy as np
 import cv2
 from skimage import io
+import os
 
-version = 0 * 1000000 + 5 * 1000 + 0 * 1
+version = 0 * 1000000 + 6 * 1000 + 0 * 1
+
+# KONSTANTY
+DES_MATRIX = 0
 
 def serialize( result ):
   resStr = '';
@@ -30,6 +34,21 @@ def serialize( result ):
         if j!= rows-1:
           resStr = resStr + ';'
   return resStr
+  
+def deserialize(data, tp):
+  # tp 0 == MATRIX
+  if tp == 0:
+    data_rows = data.split(";")
+    data_cols = data_rows[0].split(",")
+    matrix = np.zeros([len(data_rows), len(data_cols)], np.double)
+    for i in range(len(data_rows)):
+      data_cols = data_rows[i].split(",")
+      for j in range(len(data_cols)):
+        matrix[i,j] = float(data_cols[j])
+    return matrix
+  else:
+    print 'Neznamy dat vystupnich dat'
+    return None
   
 def getParams(login, passwd, taskStr):
   #Vytvoreni parametru http pozadavku
@@ -128,7 +147,7 @@ def submitFile(login, passwd, taskStr, filename):
 def submit(login, passwd, taskStr, filename, func_name):  
   # Nastaveni promennych
   result = {}
-  m = __import__(taskStr + '_func')
+  m = __import__(os.path.basename(filename)[:-3])
   method = getattr(m, func_name)  
   # Stazeni a zpracovani testovacich dat
   sub_par = getParams(login, passwd, taskStr)
@@ -195,7 +214,13 @@ def submit(login, passwd, taskStr, filename, func_name):
         res = {}    
         res['value'] = method(Imgs, ImgsParams)
         res['name'] = 'r'    
-        result[1] = res                     
+        result[1] = res    
+    elif (int(sub_par) == 2):
+        data = deserialize(data_arr[1], DES_MATRIX)
+        res = {}    
+        res['value'] = method(data)
+        res['name'] = 'r'    
+        result[1] = res          
     else : 
       print 'Neznamy typ odevzdavaci funkce'
     # Pridani nekolika promennych do posilanych dat  
