@@ -216,11 +216,16 @@ def submit(login, passwd, taskStr, filename, func_name):
         res['name'] = 'r'    
         result[1] = res    
     elif (int(sub_par) == 2):
-        data = deserialize(data_arr[1], DES_MATRIX)
-        res = {}    
-        res['value'] = method(data)
-        res['name'] = 'r'    
-        result[1] = res          
+      data = deserialize(data_arr[1], DES_MATRIX)
+      res = {}    
+      res['value'] = method(data)
+      res['name'] = 'r'    
+      result[1] = res    
+    elif (int(sub_par) == 3):
+      res = {}    
+      res['value'] = method()
+      res['name'] = 'r'    
+      result[1] = res         
     else : 
       print 'Neznamy typ odevzdavaci funkce'
     # Pridani nekolika promennych do posilanych dat  
