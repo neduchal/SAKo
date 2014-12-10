@@ -152,15 +152,11 @@ def submit(login, passwd, taskStr, filename, func_name):
   # Stazeni a zpracovani testovacich dat
   sub_par = getParams(login, passwd, taskStr)
   
-  if(int(sub_par) != 3)
-  {
+  if(int(sub_par) != 3):
     data = getTestData(login, passwd, taskStr)  
     data_arr = handleTestData(data)  
-  }
-  else
-  {
+  else:
     data_arr = []
-  }
   
   if(type(data_arr) != str):
     if(int(sub_par) == 0):
