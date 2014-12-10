@@ -52,7 +52,7 @@ def deserialize(data, tp):
   
 def getParams(login, passwd, taskStr):
   #Vytvoreni parametru http pozadavku
-  params = urllib.urlencode({'login': login,'passwd': passwd, 'taskStr': taskStr})
+  params = urllib.urlencode({'login': login,'passwd': passwd, 'taskStr': taskStr, 'version' : version})
   # Hlavicky http pozadavku
   headers = {"Content-type": "application/x-www-form-urlencoded",
              "Accept": "text/plain"}
