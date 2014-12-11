@@ -3,6 +3,7 @@
 # Nacteni knihoven 
 import httplib, urllib
 import numpy as np
+import sys
 import cv2
 from skimage import io
 import os
@@ -150,8 +151,12 @@ def submit(login, passwd, taskStr, filename, func_name):
   m = __import__(os.path.basename(filename)[:-3])
   method = getattr(m, func_name)  
   # Stazeni a zpracovani testovacich dat
-  sub_par = getParams(login, passwd, taskStr)
+  sub_par = getParams(login, passwd, taskStr)  
   
+  par_arr = handleTestData(sub_par)
+  if(len(par_arr) == 0):
+    sys.exit(0)
+    
   if(int(sub_par) != 3):
     data = getTestData(login, passwd, taskStr)  
     data_arr = handleTestData(data)  
