@@ -8,7 +8,7 @@ import cv2
 from skimage import io
 import os
 
-version = 0 * 1000000 + 6 * 1000 + 2 * 1
+version = 0 * 1000000 + 6 * 1000 + 3 * 1
 
 # KONSTANTY
 DES_MATRIX = 0
