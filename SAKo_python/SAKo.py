@@ -7,7 +7,7 @@ import cv2
 from skimage import io
 import os
 
-version = 0 * 1000000 + 6 * 1000 + 0 * 1
+version = 0 * 1000000 + 6 * 1000 + 2 * 1
 
 # KONSTANTY
 DES_MATRIX = 0
@@ -239,9 +239,14 @@ def submit(login, passwd, taskStr, filename, func_name):
     lang['value'] = 'python'     
     result[len(result)+1] = lang;
     pack = {}  
-    pack['name']  = 'test_package'
-    pack['value'] = data_arr[0]    
+    pack['name']  = 'test_package'    
+    if(int(sub_par) != 3):    
+      pack['value'] = data_arr[0]    
+    else:
+      pack['value'] = 0   
     result[len(result)+1] = pack;  
+      
+      
     # Nacteni uzivatelskeho skriptu a pripojeni k posilanym datum
     with open(filename, 'r') as content_file:
       content = content_file.read()     
