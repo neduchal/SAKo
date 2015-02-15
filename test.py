@@ -3,5 +3,5 @@
 # Nacteni knihoven 
 import SAKo
 
-# SAKo.submit(login, heslo, id_ulohy, cesta k souboru se sem praci, nazev funkce)
-SAKo.submit('test', 'test', 'test', './test_func.py','histogram')
+# SAKo.submit(ZDO/MPV, SLOZKA, LOGIN, PASSWORD, TASK)
+SAKo.submit("sako_dev", "/home/neduchal/Dropbox/sdileni/vykazy", "neduchal", "testing", "bimodal")
