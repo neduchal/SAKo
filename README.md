@@ -11,7 +11,6 @@ Klient Systému Automatické Kontroly semestrálních prací
 Obecné požadavky 
 ----------------
 * Python 2.7
-* OpenCV 2/3
 * Python modules : urllib
 
 
