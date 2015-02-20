@@ -1,5 +1,19 @@
 #! /usr/bin/python
 # -*- coding: utf-8 -*-
+
+"""
+:platform: Unix, Windows
+:synopsis: Klient Systému Automatické Kontroly (SAKo)
+
+.. moduleauthor:: Petr Neduchal <neduchal@ntis.zcu.cz>
+
+
+"""
+
+
+
+
+
 # Nacteni knihoven 
 import os
 import os.path
@@ -12,7 +26,9 @@ version = 1 * 1000000 + 0 * 1000 + 0 * 1
 DES_MATRIX = 0
 
 class directory:
-
+    """
+        Třída pro práci se složkou
+    """
     # construktor
     def __init__(self, dirname): #
         self.filelist = []
@@ -43,8 +59,22 @@ class directory:
 
     pass
 
-def submit(app_url, dirname, login, passwd, task):
-    url = "http://147.228.124.51/" + app_url + "/index.php"
+def submit(app, dirname, login, passwd, task):
+    """Funkce pro odevzdání úlohy na server.
+
+    Args:
+       app (str):  Aplikace do které je kód odevzdáván
+       
+       dirname (str): Složka s odevzdávanými soubory.
+       
+       login (str): Login do szstému SAKo
+       
+       passwd (str): Heslo do systému SAKo
+       
+       task (str): Název odevzdávané úlohy
+       
+    """    
+    url = "http://147.228.124.51/" + app + "/index.php"
 
     dir = directory(dirname)
     data = {}
