@@ -30,7 +30,12 @@ class directory:
         Třída pro práci se složkou
     """
     # construktor
-    def __init__(self, dirname): #
+    def __init__(self, dirname): 
+        """Konstruktor třídy
+            
+           :param dirname: Cesta ke složce.
+           :type dirname: str.
+        """
         self.filelist = []
         for root, directories, files in os.walk(dirname):
             for filename in files:
@@ -41,20 +46,45 @@ class directory:
         self.count = len(self.filelist)
 
     def getNext(self):
+        """
+            Vrátí další položku v otevřené složce.
+            
+            :returns: str -- cesta k souboru
+        """
         self.position = self.position + 1
         return self.filelist[self.position - 1]
 
     def getPrevious(self):
+        """
+            Vrátí předchozí položku v otevřené složce.
+            
+            :returns: str -- cesta k souboru
+        """        
         self.position = self.position - 1
         return self.filelist[self.position + 1]
 
     def getFirst(self):
+        """
+            Vrátí první položku v otevřené složce.
+            
+            :returns: str -- cesta k souboru
+        """        
         return self.filelist[0]
 
     def getLast(self):
+        """
+            Vrátí poslední položku v otevřené složce.
+            
+            :returns: str -- cesta k souboru
+        """        
         return self.filelist[self.count-1]
 
     def getCount(self):
+        """
+            Vrátí počet položek v otevřené složce.
+            
+            :returns: int -- pocet položek
+        """        
         return self.count
 
     pass
@@ -62,16 +92,17 @@ class directory:
 def submit(app, dirname, login, passwd, task):
     """Funkce pro odevzdání úlohy na server.
 
-    Args:
-       app (str):  Aplikace do které je kód odevzdáván
+       :param app: Aplikace do které je kód odevzdáván.
+       :type app: str.
        
-       dirname (str): Složka s odevzdávanými soubory.
-       
-       login (str): Login do szstému SAKo
-       
-       passwd (str): Heslo do systému SAKo
-       
-       task (str): Název odevzdávané úlohy
+       :param dirname:  Složka s odevzdávanými soubory.
+       :type dirname: str.   
+       :param login:  Login do systému SAKo.
+       :type login: str.
+       :param passwd:  Heslo do systému SAKo.
+       :type passwd: str. 
+       :param task:  Název odevzdávané úlohy.
+       :type task: str.        
        
     """    
     url = "http://147.228.124.51/" + app + "/index.php"

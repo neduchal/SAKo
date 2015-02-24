@@ -15,7 +15,9 @@ SAKo klient
 ===========
 
 .. automodule:: SAKo
-    :members:
+   :special-members: 
+   :members: 
+        
 
 Indices and tables
 ==================
