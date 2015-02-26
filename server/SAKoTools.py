@@ -51,6 +51,8 @@ class result:
         
         Ukázka použití: 
         
+        .. code-block:: python 
+        
             import SAKoTools            
             r = SAKoTools.result('./')
             r.addText("TEST 1")
