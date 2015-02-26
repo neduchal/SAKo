@@ -16,10 +16,26 @@ import json
 import collections
 
 def getPathToSubmitedData(idString):
+    """
+        Vrátí cestu k nahraným datům
+        
+        :param idString: Retezec s casti cesty
+        :type idString: str
+    """
     dir = "../" + os.path.dirname(idString[2:]) + "/"
     return dir
 
 def getMethodInModule(dir, module, method):
+    """
+        Vrátí odkaz na metodu.
+        
+        :param dir: cesta do složky
+        :type dir: str    
+        :param module: název modulu
+        :type module: str  
+        :param method: název metody
+        :type method: str          
+    """
     path_to_script = os.path.dirname(os.path.abspath(__file__))
     sys.path.append(os.path.join(path_to_script, dir))
     m = __import__(module)
