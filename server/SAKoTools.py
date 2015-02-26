@@ -44,32 +44,82 @@ def getMethodInModule(dir, module, method):
 
 
 class result:
+    """
+        Třída usnadňující tvorbu výstupu validátoru. 
+        
+        Vytvoří, naplní a uloží soubor : result.json 
+        
+        Ukázka použití: 
+        
+            import SAKoTools            
+            r = SAKoTools.result('./')
+            r.addText("TEST 1")
+            r.addText("TEST 2")            
+            r.addLink("http://exampleurl.com","Link na stranky exampleurl")
+            r.saveAndClose()
+    """
+    
     def __init__(self, dir): 
         """Konstruktor třídy
             
-           :param dirname: Cesta ke složce.
-           :type dirname: str.
+           :param dir: Cesta ke složce.
+           :type dir: str.
         """
         self.filename = dir          
         self.values = []
 
     def openResultJSON(self, dir):
+        """Otevře nový result.json soubor v zadané složce
+            
+           :param dir: Cesta ke složce.
+           :type dir: str.
+        """        
         f = open(dir + 'result.json', 'w')
         return f
     
     def addText(self, text):
+        """Přidá zadaný text do souboru s výsledkem
+            
+           :param text: Text k uložení do result.json.
+           :type text: str.
+        """               
         self.values.append('text##' + text)
      
     def addImg(self, dir, filename):
+        """Přidá obrázek do souboru s výsledkem (respektive cestu k němu)
+            
+           :param dir: Cesta ke složce.
+           :type dir: str.
+           :param filename: Název obrázku.
+           :type filename: str.           
+        """                
         self.values.append('img##' + dir + filename)
         
     def addLink(self, url, desc):
+        """Přidá odkaz do souboru s výsledkem
+            
+           :param url: url adresa.
+           :type url: str.
+           :param desc: popis odkazu.
+           :type desc: str.           
+        """         
         self.values.append('link##' +  url + "##" + filename)    
         
     def addPoints(self, userPoints, maxPoints):
+        """Přidá informaci o počtu bodů aktuálního pokusu
+            
+           :param userPoints: dosažené body.
+           :type userPoints: uint.
+           :param maxPoints: maximální počet bodů.
+           :type maxPoints: str.           
+        """          
         self.values.append('points##' + userPoints + '##' + maxPoints)
         
     def saveAndClose(self):
+        """
+            Uloží a uzavře soubor s výsledkem result.json. 
+            Tato funkce by se měla volat jako poslední.
+        """           
         f =  self.openResultJSON(self.filename) 
         d = {}
         for i in range(len(self.values)):
