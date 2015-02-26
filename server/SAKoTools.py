@@ -5,13 +5,20 @@
 :platform: Unix, Windows
 :synopsis: Server Tools Systému Automatické Kontroly (SAKo)
 
+Závislosti
+----------
+
+* sys
+* os
+* json
+* collection
+
 .. moduleauthor:: Petr Neduchal <neduchal@ntis.zcu.cz>
 
 
 """
 import sys
 import os
-import cv2
 import json
 import collections
 
@@ -47,9 +54,9 @@ class result:
     """
         Třída usnadňující tvorbu výstupu validátoru. 
         
-        Vytvoří, naplní a uloží soubor : result.json 
+        Vytvoří, naplní a uloží soubor : result.json                 
         
-        Ukázka použití: 
+        *Ukázka použití:*
         
         .. code-block:: python 
         

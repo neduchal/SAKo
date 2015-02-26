@@ -7,29 +7,28 @@
 
 .. moduleauthor:: Petr Neduchal <neduchal@ntis.zcu.cz>
 
+Závislosti
+----------
+* os
+* os.path
+* urllib
+
 Ukázka použití klienta
 
 .. code-block:: python 
 
     import SAKo            
     SAKo.submit("zdo", "./", "test_login", "test_heslo", "test_uloha")
+    
 
 """
-
-
-
-
 
 # Nacteni knihoven 
 import os
 import os.path
 import urllib
 
-
 version = 1 * 1000000 + 0 * 1000 + 0 * 1
-
-# KONSTANTY
-DES_MATRIX = 0
 
 class directory:
     """
