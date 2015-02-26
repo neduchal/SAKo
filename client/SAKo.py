@@ -7,6 +7,13 @@
 
 .. moduleauthor:: Petr Neduchal <neduchal@ntis.zcu.cz>
 
+Ukázka použití klienta
+
+.. code-block:: python 
+
+    import SAKo            
+
+
 
 """
 
@@ -27,7 +34,7 @@ DES_MATRIX = 0
 
 class directory:
     """
-        Třída pro práci se složkou
+        Třída pro práci se složkou            
     """
     # construktor
     def __init__(self, dirname): 

@@ -53,12 +53,8 @@ class result:
         
         .. code-block:: python 
         
-            import SAKoTools            
-            r = SAKoTools.result('./')
-            r.addText("TEST 1")
-            r.addText("TEST 2")            
-            r.addLink("http://exampleurl.com","Link na stranky exampleurl")
-            r.saveAndClose()
+            import SAKo            
+            SAKo.submit("zdo", "./", "test_login", "test_heslo", "test_uloha")
     """
     
     def __init__(self, dir): 
@@ -90,7 +86,7 @@ class result:
     def addImg(self, dir, filename):
         """Přidá obrázek do souboru s výsledkem (respektive cestu k němu)
             
-           :param dir: Cesta ke složce.
+           :param dir: Cesta ke složce / případně url (bez názvu souboru).
            :type dir: str.
            :param filename: Název obrázku.
            :type filename: str.           
