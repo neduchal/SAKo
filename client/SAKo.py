@@ -12,8 +12,7 @@ Ukázka použití klienta
 .. code-block:: python 
 
     import SAKo            
-
-
+    SAKo.submit("zdo", "./", "test_login", "test_heslo", "test_uloha")
 
 """
 

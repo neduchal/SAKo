@@ -53,8 +53,12 @@ class result:
         
         .. code-block:: python 
         
-            import SAKo            
-            SAKo.submit("zdo", "./", "test_login", "test_heslo", "test_uloha")
+            import SAKoTools            
+            r = SAKoTools.result('./')
+            r.addText("TEST 1")
+            r.addText("TEST 2")            
+            r.addLink("http://exampleurl.com","Link na stranky exampleurl")
+            r.saveAndClose()
     """
     
     def __init__(self, dir): 
