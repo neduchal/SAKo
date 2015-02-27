@@ -11,7 +11,7 @@ Klient Systému Automatické Kontroly semestrálních prací
 Obecné požadavky 
 ----------------
 * Python 2.7
-* Python modules : urllib
+* Python modules : urllib, json, collections
 
 
 
