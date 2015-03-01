@@ -10,5 +10,6 @@ install:
 # command to run tests
 
 script: 
- - pep8 
+ - pep8 ./client/
+ - pep8 ./server/
  - nosetests
