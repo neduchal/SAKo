@@ -15,29 +15,30 @@ Závislosti
 
 Ukázka použití klienta
 
-.. code-block:: python 
+.. code-block:: python
 
-    import SAKo            
+    import SAKo
     SAKo.submit("zdo", "./", "test_login", "test_heslo", "test_uloha")
-    
+
 
 """
 
-# Nacteni knihoven 
+# Nacteni knihoven
 import os
 import os.path
 import urllib
 
 version = 1 * 1000000 + 0 * 1000 + 0 * 1
 
+
 class directory:
     """
-        Třída pro práci se složkou            
+        Třída pro práci se složkou
     """
     # construktor
-    def __init__(self, dirname): 
+    def __init__(self, dirname):
         """Konstruktor třídy
-            
+
            :param dirname: Cesta ke složce.
            :type dirname: str.
         """
@@ -53,7 +54,7 @@ class directory:
     def getNext(self):
         """
             Vrátí další položku v otevřené složce.
-            
+
             :returns: str -- cesta k souboru
         """
         self.position = self.position + 1
@@ -62,54 +63,55 @@ class directory:
     def getPrevious(self):
         """
             Vrátí předchozí položku v otevřené složce.
-            
+
             :returns: str -- cesta k souboru
-        """        
+        """
         self.position = self.position - 1
         return self.filelist[self.position + 1]
 
     def getFirst(self):
         """
             Vrátí první položku v otevřené složce.
-            
+
             :returns: str -- cesta k souboru
-        """        
+        """
         return self.filelist[0]
 
     def getLast(self):
         """
             Vrátí poslední položku v otevřené složce.
-            
+
             :returns: str -- cesta k souboru
-        """        
+        """
         return self.filelist[self.count-1]
 
     def getCount(self):
         """
             Vrátí počet položek v otevřené složce.
-            
+
             :returns: int -- pocet položek
-        """        
+        """
         return self.count
 
     pass
+
 
 def submit(app, dirname, login, passwd, task):
     """Funkce pro odevzdání úlohy na server.
 
        :param app: Aplikace do které je kód odevzdáván.
        :type app: str.
-       
+
        :param dirname:  Složka s odevzdávanými soubory.
-       :type dirname: str.   
+       :type dirname: str.
        :param login:  Login do systému SAKo.
        :type login: str.
        :param passwd:  Heslo do systému SAKo.
-       :type passwd: str. 
+       :type passwd: str.
        :param task:  Název odevzdávané úlohy.
-       :type task: str.        
-       
-    """    
+       :type task: str.
+
+    """
     url = "http://147.228.124.51/" + app + "/index.php"
 
     dir = directory(dirname)
@@ -118,16 +120,16 @@ def submit(app, dirname, login, passwd, task):
     data['password'] = passwd
     data['task'] = task
     data['version'] = version
-        
+
     for i in range(dir.getCount()):
-        filename = dir.getNext();
+        filename = dir.getNext()
         print "Oteviram soubor : " + filename
         f = open(filename, 'rb')
-        filebody = f.read()    
+        filebody = f.read()
         data['name' + str(i)] = filename
         data['file' + str(i)] = filebody
     print "Komunikace se serverem..."
     u = urllib.urlopen(url, urllib.urlencode(data))
-    print "Vysledek :"         
+    print "Vysledek :"
     print u.read()
-    f.close()  
+    f.close()
