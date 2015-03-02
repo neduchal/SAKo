@@ -130,6 +130,11 @@ def submit(app, dirname, login, passwd, task):
         data['file' + str(i)] = filebody
     print "Komunikace se serverem..."
     u = urllib.urlopen(url, urllib.urlencode(data))
-    print "Vysledek :"
-    print u.read()
+    respond = u.read()
+    respond_arr = respond.split('##')
+    if (respond_arr[0] == 'actualize'):
+        urllib.urlretrieve(respond_arr[1],'SAKo.py')
+    else:
+        print "Vysledek :"
+        print respond
     f.close()
