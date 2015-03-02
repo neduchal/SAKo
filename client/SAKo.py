@@ -133,7 +133,7 @@ def submit(app, dirname, login, passwd, task):
     respond = u.read()
     respond_arr = respond.split('##')
     if (respond_arr[0] == 'actualize'):
-        urllib.urlretrieve(respond_arr[1],'SAKo.py')
+        data = urllib.urlretrieve(respond_arr[1],os.path.abspath(__file__))
     else:
         print "Vysledek :"
         print respond
