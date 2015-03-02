@@ -133,9 +133,8 @@ def submit(app, dirname, login, passwd, task):
     respond = u.read()
     respond_arr = respond.split('##')
     if (respond_arr[0] == 'actualize'):
-        data = urllib.urlretrieve(respond_arr[1], os.path.abspath(__file__))
-        print "Vysledek :"
-        print respond_arr[2]
+        data = urllib.urlretrieve(respond_arr[1],os.path.abspath(__file__))
+        print "Klient byl aktualizovan. Provedte novy pokus o odevzdani"
     else:
         print "Vysledek :"
         print respond
