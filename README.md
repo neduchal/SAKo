@@ -14,6 +14,7 @@ Obecné požadavky
 * Python modules : urllib, json, collections
 
 [![Documentation Status](https://readthedocs.org/projects/sako/badge/?version=latest)](https://readthedocs.org/projects/sako/?badge=latest)
+[![Build Status](https://travis-ci.org/neduchal/SAKo.svg?branch=master)](https://travis-ci.org/neduchal/SAKo)
 
 
 
