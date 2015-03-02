@@ -1,6 +1,6 @@
 language: python
 python:
-  - "2.6"
+#  - "2.6"
   - "2.7"
 
 install:
@@ -10,6 +10,6 @@ install:
 # command to run tests
 
 script: 
- - pep8 ./client/
- - pep8 ./server/
+ - pep8 ./client/ --ignore=E402
+ - pep8 ./server/ --ignore=E402
  - nosetests
