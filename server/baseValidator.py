@@ -34,7 +34,7 @@ SAKoTools.getMethodInModule(dir, 'module', 'method')
     Validace odevzdane prace :
 
         Zalezi na konkretni uloze
-                
+
 """
 r = SAKoTools.result(dir)
 
@@ -43,19 +43,19 @@ points = 0
 for i in range(10):
     a = random.randint(1, 20)
     b = random.randint(1, 20)
-    
+
     result1 = a + b
     result2 = method(a, b)
-    
-    diff = diff + int((result1-result2) == 0)
+
+    diff = diff + int((result1 - result2) == 0)
     pas = "spatne"
     if diff == 0:
         pas = "spravne"
-        points = points + 1   
-    print("Test " + str(i) + ": a = " + str(a) + ", b = " + str(b) + 
-          ", vysledek metody :" + str(result2) + 
+        points = points + 1
+    print("Test " + str(i) + ": a = " + str(a) + ", b = " + str(b) +
+          ", vysledek metody :" + str(result2) +
           ", spravny vysledek : " + str(result1) + " (" + pas + ")")
-    
+
 print "Ziskany pocet bodu : " + str(10 - diff) + "/10"
 r.addPoints()
 r.saveAndClose()

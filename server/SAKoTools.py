@@ -56,20 +56,20 @@ class result:
     """
         Třída usnadňující tvorbu výstupu validátoru.
 
-        Vytvoří, naplní a uloží soubor : result.json               
+        Vytvoří, naplní a uloží soubor : result.json
 
         *Ukázka použití:*
 
         .. code-block:: python
 
-            import SAKoTools      
+            import SAKoTools
             r = SAKoTools.result('./')
             r.addText("TEST 1")
             r.addText("TEST 2")
             r.addLink("http://exampleurl.com","Link na stranky exampleurl")
             r.saveAndClose()
     """
-    
+
     def __init__(self, dir):
         """Konstruktor třídy
 
@@ -87,7 +87,7 @@ class result:
         """
         f = open(dir + 'result.json', 'w')
         return f
-    
+
     def addText(self, text):
         """Přidá zadaný text do souboru s výsledkem
 
@@ -114,7 +114,7 @@ class result:
            :param desc: popis odkazu.
            :type desc: str.
         """
-        self.values.append('link##' +  url + "##" + desc)
+        self.values.append('link##' + url + "##" + desc)
 
     def addPoints(self, userPoints, maxPoints):
         """Přidá informaci o počtu bodů aktuálního pokusu
@@ -131,10 +131,10 @@ class result:
             Uloží a uzavře soubor s výsledkem result.json.
             Tato funkce by se měla volat jako poslední.
         """
-        f =  self.openResultJSON(self.filename)
+        f = self.openResultJSON(self.filename)
         d = {}
         for i in range(len(self.values)):
-            d.update({str(i) : str(self.values[i])})
+            d.update({str(i): str(self.values[i])})
         od = collections.OrderedDict(sorted(d.items()))
-        json.dump(od,f)
+        json.dump(od, f)
         f.close()
