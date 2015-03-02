@@ -83,7 +83,7 @@ class directory:
 
             :returns: str -- cesta k souboru
         """
-        return self.filelist[self.count-1]
+        return self.filelist[self.count - 1]
 
     def getCount(self):
         """

@@ -16,7 +16,7 @@ import SAKoTools
 """
     Vytvoření parseru parametrů
 """
-parser = argparse.ArgumentParser( description='Base Validator.')
+parser = argparse.ArgumentParser(description='Base Validator.')
 parser.add_argument('-i', '--input', default=False)
 args = parser.parse_args()
 
@@ -30,20 +30,17 @@ dir = SAKoTools.getPathToSubmitedData(args.input)
 """
 SAKoTools.getMethodInModule(dir, 'module', 'method')
 
-
 """
     Validace odevzdane prace :
-    
+
         Zalezi na konkretni uloze
                 
 """
 r = SAKoTools.result(dir)
 
-
-
 pas = "spatne"
 points = 0
-for i in range(10):    
+for i in range(10):
     a = random.randint(1, 20)
     b = random.randint(1, 20)
     
@@ -55,9 +52,10 @@ for i in range(10):
     if diff == 0:
         pas = "spravne"
         points = points + 1   
-    print "Test " + str(i) + ": a = " + str(a) + ", b = " + str(b) + ", vysledek metody :" + str(result2) + ", spravny vysledek : " + str(result1) + " (" + pas + ")"
+    print("Test " + str(i) + ": a = " + str(a) + ", b = " + str(b) + 
+          ", vysledek metody :" + str(result2) + 
+          ", spravny vysledek : " + str(result1) + " (" + pas + ")")
     
-print "Ziskany pocet bodu : " + str(10-diff) + "/10"
+print "Ziskany pocet bodu : " + str(10 - diff) + "/10"
 r.addPoints()
 r.saveAndClose()
-
