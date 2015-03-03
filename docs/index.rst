@@ -6,6 +6,11 @@
 Welcome to SAKo's documentation!
 ================================
 
+Cesta k stable verzi :
+----------------------
+.. _a link: https://github.com/neduchal/SAKo/releases/
+
+
 Contents:
 
 .. toctree::
