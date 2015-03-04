@@ -22,18 +22,6 @@ import os
 import json
 import collections
 
-
-def getPathToSubmitedData(idString):
-    """
-        Vrátí cestu k nahraným datům
-
-        :param idString: Retezec s casti cesty
-        :type idString: str
-    """
-    dir = "../" + os.path.dirname(idString[2:]) + "/"
-    return dir
-
-
 def getMethodInModule(dir, module, method):
     """
         Vrátí odkaz na metodu.
@@ -45,6 +33,7 @@ def getMethodInModule(dir, module, method):
         :param method: název metody
         :type method: str
     """
+    dir = "../" + os.path.dirname(dir[2:]) + "/"
     path_to_script = os.path.dirname(os.path.abspath(__file__))
     sys.path.append(os.path.join(path_to_script, dir))
     m = __import__(module)
@@ -77,6 +66,7 @@ class result:
            :type dir: str.
         """
         self.filename = dir
+        self.updateLastAttemptFile()
         self.values = []
 
     def openResultJSON(self, dir):
@@ -124,7 +114,7 @@ class result:
            :param maxPoints: maximální počet bodů.
            :type maxPoints: str.
         """
-        self.values.append('points##' + userPoints + '##' + maxPoints)
+        self.values.append('points##' + str(userPoints) + '##' + str(maxPoints))     
 
     def saveAndClose(self):
         """
@@ -134,7 +124,19 @@ class result:
         f = self.openResultJSON(self.filename)
         d = {}
         for i in range(len(self.values)):
-            d.update({str(i): str(self.values[i])})
-        od = collections.OrderedDict(sorted(d.items()))
+            d.update({str(i): str(self.values[i])})          
+        od = collections.OrderedDict(sorted(d.items()))    
         json.dump(od, f)
         f.close()
+        
+    def updateLastAttemptFile(self):
+        """Updatuje soubor s informací o posledním pokusu o odevzdání
+
+           :param dir: Cesta ke složce.
+           :type dir: str.
+        """
+        f = open(self.filename[:-20] + 'lastAttempt.json', 'w')
+        d = {'date' : self.filename[-20:-1]}    
+        json.dump(d, f)
+        f.close() 
+        pass
