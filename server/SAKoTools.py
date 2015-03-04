@@ -22,6 +22,7 @@ import os
 import json
 import collections
 
+
 def getMethodInModule(dir, module, method):
     """
         Vrátí odkaz na metodu.
@@ -114,7 +115,9 @@ class result:
            :param maxPoints: maximální počet bodů.
            :type maxPoints: str.
         """
-        self.values.append('points##' + str(userPoints) + '##' + str(maxPoints))     
+        userP = str(userPoints)
+        maxP = str(maxPoints)
+        self.values.append('points##' + userP + '##' + maxP)
 
     def saveAndClose(self):
         """
@@ -124,8 +127,8 @@ class result:
         f = self.openResultJSON(self.filename)
         d = {}
         for i in range(len(self.values)):
-            d.update({str(i): str(self.values[i])})          
-        od = collections.OrderedDict(sorted(d.items()))    
+            d.update({str(i): str(self.values[i])})      
+        od = collections.OrderedDict(sorted(d.items()))
         json.dump(od, f)
         f.close()
         
@@ -136,7 +139,6 @@ class result:
            :type dir: str.
         """
         f = open(self.filename[:-20] + 'lastAttempt.json', 'w')
-        d = {'date' : self.filename[-20:-1]}    
+        d = {'date': self.filename[-20:-1]}
         json.dump(d, f)
-        f.close() 
-        pass
+        f.close()
