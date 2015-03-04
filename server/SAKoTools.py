@@ -127,11 +127,11 @@ class result:
         f = self.openResultJSON(self.filename)
         d = {}
         for i in range(len(self.values)):
-            d.update({str(i): str(self.values[i])})      
+            d.update({str(i): str(self.values[i])})
         od = collections.OrderedDict(sorted(d.items()))
         json.dump(od, f)
         f.close()
-        
+
     def updateLastAttemptFile(self):
         """Updatuje soubor s informací o posledním pokusu o odevzdání
 
