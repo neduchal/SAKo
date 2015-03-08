@@ -16,10 +16,10 @@ Závislosti
 **Ukázka použití klienta**
 
 Vytvořte si na disku slozku sako a do ni složku src. Dosložky sako nahrajte
- soubor SAKo.py a do složky src nahrajte soubory, které budete odevzdávat.
+soubor SAKo.py a do složky src nahrajte soubory, které budete odevzdávat.
 
 Následně ve složce sako vytvořte soubor submit.py do kterého zapište
- následující kód.
+následující kód.
 
 .. code-block:: python
     #! /usr/bin/python
@@ -27,14 +27,20 @@ Následně ve složce sako vytvořte soubor submit.py do kterého zapište
 
     import SAKo
     SAKo.submit("zdo", "./src/", "login", "heslo", "copy")
-    
+
+
 **Význam jednotlivých parametrů**
 
 *"zdo"* - Aplikace, do které odevzdáváte (zdo/mpv
+
 *"./src/"* - Relativní cesta ke složce s odevzdávanými soubory
+
 *"login"* - Váš login do systému SAKo
+
 *"heslo"* - Vaše heslo do systému SAKo
+
 *"copy"* - Odevzdávaná úloha. Úloha copy pouze nahraje soubory na server.
+
 """
 
 # Nacteni knihoven
