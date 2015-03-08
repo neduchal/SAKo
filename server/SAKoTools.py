@@ -138,7 +138,11 @@ class result:
            :param dir: Cesta ke složce.
            :type dir: str.
         """
+        datetime = self.filename[-20:-1]
+        datetime = datetime[0:4] + "-" + datetime[5:7] + "-" + \
+            datetime[8:10] + " " + datetime[11:13] + ":" + \
+            datetime[14:16] + ":" + datetime[17:19]
         f = open(self.filename[:-20] + 'lastAttempt.json', 'w')
-        d = {'date': self.filename[-20:-1]}
+        d = {'datetime': datetime}
         json.dump(d, f)
         f.close()
