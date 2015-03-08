@@ -38,9 +38,9 @@ Do něj pak vložte následující kód.
 **Samotný kód**
 
 .. code-block:: python
+
     #! /usr/bin/python
     # -*- coding: utf-8 -*-
-
     import SAKo
     SAKo.submit("zdo", "./src/", "login", "heslo", "copy")
 
