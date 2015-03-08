@@ -15,18 +15,12 @@ Závislosti
 
 **Ukázka použití klienta**
 
-Vytvořte si na disku slozku sako a do ni složku src. Dosložky sako nahrajte
-soubor SAKo.py a do složky src nahrajte soubory, které budete odevzdávat.
+Vytvořte si na disku slozku sako a do ni složku src.
+Do složky sako nahrajte soubor SAKo.py.
+Do složky src nahrajte soubory, které budete odevzdávat.
 
-Následně ve složce sako vytvořte soubor submit.py do kterého zapište
-následující kód.
-
-.. code-block:: python
-    #! /usr/bin/python
-    # -*- coding: utf-8 -*-
-
-    import SAKo
-    SAKo.submit("zdo", "./src/", "login", "heslo", "copy")
+Následně ve složce sako vytvořte soubor submit.py.
+Do něj pak vložte následující kód.
 
 
 **Význam jednotlivých parametrů**
@@ -40,6 +34,15 @@ následující kód.
 *"heslo"* - Vaše heslo do systému SAKo
 
 *"copy"* - Odevzdávaná úloha. Úloha copy pouze nahraje soubory na server.
+
+**Samotný kód**
+
+.. code-block:: python
+    #! /usr/bin/python
+    # -*- coding: utf-8 -*-
+
+    import SAKo
+    SAKo.submit("zdo", "./src/", "login", "heslo", "copy")
 
 """
 
