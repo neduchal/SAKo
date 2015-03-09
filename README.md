@@ -8,7 +8,7 @@ Klient Systému Automatické Kontroly semestrálních prací
 * Při návratové hodnotě 500 Internal Server Error opakujte pokus o odevzdání.
 * Testováno na Windows 7 a Ubuntu 14.04
 
-[Documentace stabilní verze](http://sako.readthedocs.org/cs/v1.0.0b/)
+[Documentace stabilní verze](http://sako.readthedocs.org/cs/v1.0.0rc2/)
 
 
 Obecné požadavky 
@@ -17,7 +17,7 @@ Obecné požadavky
 * Python modules : urllib, json, collections
 
 [![Documentation Status](https://readthedocs.org/projects/sako/badge/?version=latest)](https://readthedocs.org/projects/sako/?badge=latest)
-[![Documentation Status](https://readthedocs.org/projects/sako/badge/?version=v1.0.0rc)](https://readthedocs.org/projects/sako/?badge=v1.0.0b)
+[![Documentation Status](https://readthedocs.org/projects/sako/badge/?version=v1.0.0rc2)](https://readthedocs.org/projects/sako/?badge=v1.0.0b)
 [![Build Status](https://travis-ci.org/neduchal/SAKo.svg?branch=master)](https://travis-ci.org/neduchal/SAKo)
 
 
