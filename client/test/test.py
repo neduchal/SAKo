@@ -11,4 +11,4 @@ sys.path.append(os.path.join(path_to_script, "../"))
 import SAKo
 
 # SAKo.submit(ZDO/MPV, SLOZKA, LOGIN, PASSWORD, TASK)
-SAKo.submit("zdo", "./", "test", "test", 'test2')
+SAKo.submit("sako_dev", "/home/neduchal/Dokumenty/ostatni/test_saka/", "neduchal", "nedsako%396", 'copy')

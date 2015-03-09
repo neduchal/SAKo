@@ -11,5 +11,4 @@ install:
 
 script: 
  - pep8 ./client/ --ignore=E402
- - pep8 ./server/ --ignore=E402
  - nosetests
