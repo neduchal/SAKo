@@ -13,13 +13,36 @@ Závislosti
 * os.path
 * urllib
 
-Ukázka použití klienta
+**Ukázka použití klienta**
+
+Vytvořte si na disku slozku sako a do ni složku src.
+Do složky sako nahrajte soubor SAKo.py.
+Do složky src nahrajte soubory, které budete odevzdávat.
+
+Následně ve složce sako vytvořte soubor submit.py.
+Do něj pak vložte následující kód.
+
+
+**Význam jednotlivých parametrů**
+
+*"zdo"* - Aplikace, do které odevzdáváte (zdo/mpv
+
+*"./src/"* - Relativní cesta ke složce s odevzdávanými soubory
+
+*"login"* - Váš login do systému SAKo
+
+*"heslo"* - Vaše heslo do systému SAKo
+
+*"copy"* - Odevzdávaná úloha. Úloha copy pouze nahraje soubory na server.
+
+**Samotný kód**
 
 .. code-block:: python
 
+    #! /usr/bin/python
+    # -*- coding: utf-8 -*-
     import SAKo
-    SAKo.submit("zdo", "./", "test_login", "test_heslo", "test_uloha")
-
+    SAKo.submit("zdo", "./src/", "login", "heslo", "copy")
 
 """
 
