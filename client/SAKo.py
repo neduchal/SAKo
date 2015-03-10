@@ -135,7 +135,7 @@ def submit(app, dirname, login, passwd, task):
        :type task: str.
 
     """
-    url = "http://147.228.124.51/" + app + "/index.php"
+    url = "http://147.228.124.51/" + app + "/"
 
     dir = directory(dirname)
     data = {}
