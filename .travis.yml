@@ -7,6 +7,7 @@ install:
 #  - "pip install ."
 #  - "pip install -r requirements.txt"
   - pip install pep8
+  - curl -X POST http://readthedocs.org/build/sako
 # command to run tests
 
 script: 
