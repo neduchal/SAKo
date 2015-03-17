@@ -17,22 +17,56 @@ import SAKo
 class TestSAKoDirectoryClass(unittest.TestCase):
 
     def setUp(self):
-        self.dir = SAKo.directory(path_to_script)
+        pass
+        
+    def test_find(self):
+        dir = None
+        try:
+            dir = SAKo.directory(path_to_script)
+        except:
+            self.assert_(false)
+        for i in range(dir.getCount()):
+            filename = dir.getNext()
+            if filename is not None :
+                if filename == "test_directory.py":
+                    self.assert_(true)
+                    pass
+        self.assert_(false)
 
-    def test_getFirst(self):
-        filename = self.dir.getFirst()
-        print os.path.basename(filename)
-        self.assert_(os.path.basename(filename) == "test_directory.py")
+    def test_previous(self):
+        try:
+            dir = SAKo.directory(path_to_script)
+        except:
+            self.assert_(false)
+        dir.position = dir.getCount() - 1
+        dir.getPrevious()
+        self.assert_(dir.position ==  dir.getCount() - 2)
+        
+    def test_next(self):
+        try:
+            dir = SAKo.directory(path_to_script)
+        except:
+            self.assert_(false)
+        dir.getNext()
+        self.assert_(dir.position ==  1)
+        
+    def test_first(self):
+        try:
+            dir = SAKo.directory(path_to_script)
+        except:
+            self.assert_(false)
+        filename = dir.getFirst()
+        self.assert_(dir.filelist[0] ==  filename)
+        
+    def test_Last(self):
+        try:
+            dir = SAKo.directory(path_to_script)
+        except:
+            self.assert_(false)
+        filename = dir.getLast()
+        self.assert_(dir.filelist[dir.getCount() - 1] ==  filename)
+        
 
-    def test_getLast(self):
-        filename = self.dir.getLast()
-        print os.path.basename(filename)
-        self.assert_(os.path.basename(filename) == "test_directory.py")
-
-    def test_getCount(self):
-        count = self.dir.getCount()
-        print count
-        self.assert_(count == 1)
 
 if __name__ == "__main__":
     unittest.main()
