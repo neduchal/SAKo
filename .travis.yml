@@ -6,10 +6,14 @@ python:
 install:
 #  - "pip install ."
 #  - "pip install -r requirements.txt"
+  - pip install coveralls
   - pip install pep8
   - curl -X POST http://readthedocs.org/build/sako
 # command to run tests
 
 script: 
  - pep8 ./client/ --ignore=E402
- - nosetests
+ - nosetests --with-coverage --cover-package=SAKo
+
+after_success:
+  coveralls

@@ -12,22 +12,23 @@ sys.path.append(os.path.join(path_to_script, "../"))
 
 import SAKo
 
+
 class TestSAKoDirectoryClass(unittest.TestCase):
-    
+
     def setUp(self):
         self.dir = SAKo.directory("./")
-        
+
     def test_getFirst(self):
         filename = self.dir.getFirst()
         self.assert_(os.path.basename(filename) == "test.py")
-  
+
     def test_getLast(self):
         filename = self.dir.getLast()
-        self.assert_(os.path.basename(filename) == "test.py")        
-        
+        self.assert_(os.path.basename(filename) == "test.py")
+
     def test_getCount(self):
         count = self.dir.getCount()
-        self.assert_(count == 1)             
+        self.assert_(count == 1)
 
 if __name__ == "__main__":
-    print "Hello World"
+    unittest.main()
