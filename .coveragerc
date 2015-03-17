@@ -1,5 +1,5 @@
 [report]
-omit = */example/*
-
-[run]
-source = */test/*
+omit = 
+    */example/*
+    */python?.?/*
+    */site-packages/nose/*
