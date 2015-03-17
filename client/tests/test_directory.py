@@ -24,20 +24,20 @@ class TestSAKoDirectoryClass(unittest.TestCase):
         try:
             dir = SAKo.directory(path_to_script)
         except:
-            self.assert_(false)
+            self.assert_(False)
         for i in range(dir.getCount()):
             filename = dir.getNext()
             if filename is not None :
                 if filename == "test_directory.py":
-                    self.assert_(true)
+                    self.assert_(True)
                     pass
-        self.assert_(false)
+        self.assert_(False)
 
     def test_previous(self):
         try:
             dir = SAKo.directory(path_to_script)
         except:
-            self.assert_(false)
+            self.assert_(False)
         dir.position = dir.getCount() - 1
         dir.getPrevious()
         self.assert_(dir.position ==  dir.getCount() - 2)
@@ -46,7 +46,7 @@ class TestSAKoDirectoryClass(unittest.TestCase):
         try:
             dir = SAKo.directory(path_to_script)
         except:
-            self.assert_(false)
+            self.assert_(False)
         dir.getNext()
         self.assert_(dir.position ==  1)
         
@@ -54,7 +54,7 @@ class TestSAKoDirectoryClass(unittest.TestCase):
         try:
             dir = SAKo.directory(path_to_script)
         except:
-            self.assert_(false)
+            self.assert_(False)
         filename = dir.getFirst()
         self.assert_(dir.filelist[0] ==  filename)
         
@@ -62,7 +62,7 @@ class TestSAKoDirectoryClass(unittest.TestCase):
         try:
             dir = SAKo.directory(path_to_script)
         except:
-            self.assert_(false)
+            self.assert_(False)
         filename = dir.getLast()
         self.assert_(dir.filelist[dir.getCount() - 1] ==  filename)
         
