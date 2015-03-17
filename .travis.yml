@@ -13,7 +13,7 @@ install:
 
 script: 
  - pep8 ./client/ --ignore=E402
- - nosetests --with-coverage --cover-package=SAKo
+ - nosetests --with-coverage
 
 after_success:
   coveralls
