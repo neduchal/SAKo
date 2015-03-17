@@ -13,7 +13,7 @@ install:
 
 script: 
  - pep8 ./client/ --ignore=E402
- - nosetests --with-coverage /client/tests/
+ - nosetests --with-coverage ./client/tests/
 
 after_success:
   coveralls
