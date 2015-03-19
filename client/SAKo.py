@@ -162,3 +162,4 @@ def submit(app, dirname, login, passwd, task):
         print "Vysledek :"
         print respond
     f.close()
+    return respond
