@@ -20,8 +20,8 @@ class TestSAKoDirectoryClass(unittest.TestCase):
         pass
 
     def test_submit(self):
-        result = SAKo.submit('sako_dev', path_to_script, 'test',
-                'test1', 'ping')
+        result = SAKo.submit('sako_dev', path_to_script, 'test', 'test1',
+                             'ping')
         print result[-3:]
         self.assert_(result[-3:-1] == "OK")
 
