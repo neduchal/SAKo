@@ -113,7 +113,8 @@ def create_identification_file():
     f = open(path_to_script+'identity.pck', 'wb')
     data = dict(login=login, password=password, app=app)
     pickle.dump(data, f)
-    print 'Soubor', path_to_script+'identity.pck', 'byl vyrvoren'
+    f.close()
+    print 'Soubor', path_to_script+'identity.pck', 'byl vytvoren'
 
 if __name__ == '__main__':
 
@@ -129,26 +130,25 @@ if __name__ == '__main__':
 
     if argv.create > 0:
         create_identification_file()
-    if argv.create == 2:
-        exit(0)
-    login = ''
-    password = ''
-    app = ''
-    task = argv.task
-    directory = argv.directory
+    if argv.create != 2:
+        login = ''
+        password = ''
+        app = ''
+        task = argv.task
+        directory = argv.directory
 
-    if os.path.isfile(path_to_script+'identity.pck'):
-        with open(path_to_script+'identity.pck') as f:
-            data = pickle.load(f)
-            login = data['login']
-            password = data['password']
-            app = data['app']
-    else:
-        login = argv.login
-        password = argv.password
-        app = argv.app
+        if os.path.isfile(path_to_script+'identity.pck'):
+            with open(path_to_script+'identity.pck') as f:
+                data = pickle.load(f)
+                login = data['login']
+                password = data['password']
+                app = data['app']
+        else:
+            login = argv.login
+            password = argv.password
+            app = argv.app
 
-    submit(app, directory, login, password, task)
+        submit(app, directory, login, password, task)
 
 
 
