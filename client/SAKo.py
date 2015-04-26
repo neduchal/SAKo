@@ -124,15 +124,14 @@ if __name__ == '__main__':
     parser.add_argument('-p', '--password', help='Heslo do systemu')
     parser.add_argument('-a', '--app', help='Zarazeni v systemu [zdo, mpv, ...]')
     parser.add_argument('-t', '--task', help='Nazev odevzdavane ulohy')
-    parser.add_argument('-c', '--create', help='Vytvoreni identifikacniho souboru 0 ,1 2', default=0)
+    parser.add_argument('-c', '--create', help='Vytvoreni identifikacniho souboru 0 ,1 2', default='none')
 
     argv = parser.parse_args()
 
-    print argv.create == 2
-    if argv.create > 0:
+    if argv.create != 'none':
         create_identification_file()
 
-    if argv.create != 2:
+    if argv.create != 'only':
         login = ''
         password = ''
         app = ''
