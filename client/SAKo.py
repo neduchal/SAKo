@@ -127,9 +127,9 @@ if __name__ == '__main__':
 
     argv = parser.parse_args()
 
-    if argv.c > 0:
+    if argv.create > 0:
         create_identification_file()
-    if argv.c == 2:
+    if argv.create == 2:
         exit(0)
     login = ''
     password = ''
