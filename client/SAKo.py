@@ -131,7 +131,8 @@ if __name__ == '__main__':
     parser.add_argument('-t', '--task',
                         help='Nazev odevzdavane ulohy')
     parser.add_argument('-c', '--create',
-                        help='Vytvoreni identifikacniho souboru [only|yes]', default='none')
+                        help='Vytvoreni identifikacniho souboru [only|yes]',
+                        default='none')
 
     argv = parser.parse_args()
 
