@@ -101,6 +101,7 @@ def submit(app, dir_name, login, passwd, task):
         f.close()
     return respond
 
+
 def create_identification_file():
     """
 
@@ -110,21 +111,27 @@ def create_identification_file():
     password = raw_input('Zadejte vase heslo: ')
     app = raw_input('Vase zarazeni [zdo, mpv, ...]: ')
 
-    f = open(path_to_script+'/identity.pck', 'wb')
+    f = open(path_to_script + '/identity.pck', 'wb')
     data = dict(login=login, password=password, app=app)
     pickle.dump(data, f, pickle.HIGHEST_PROTOCOL)
     f.close()
-    print 'Soubor', path_to_script+'/identity.pck', 'byl vytvoren'
+    print 'Soubor', path_to_script + '/identity.pck', 'byl vytvoren'
 
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('-d', '--directory', help='Cesta k odevzdavanym souborum, napriklad ./src')
-    parser.add_argument('-l', '--login', help='Login do systemu')
-    parser.add_argument('-p', '--password', help='Heslo do systemu')
-    parser.add_argument('-a', '--app', help='Zarazeni v systemu [zdo, mpv, ...]')
-    parser.add_argument('-t', '--task', help='Nazev odevzdavane ulohy')
-    parser.add_argument('-c', '--create', help='Vytvoreni identifikacniho souboru 0 ,1 2', default='none')
+    parser.add_argument('-d', '--directory',
+                        help='Cesta k odevzdavanym souborum [./src]')
+    parser.add_argument('-l', '--login',
+                        help='Login do systemu')
+    parser.add_argument('-p', '--password',
+                        help='Heslo do systemu')
+    parser.add_argument('-a', '--app',
+                        help='Zarazeni v systemu [zdo, mpv, ...]')
+    parser.add_argument('-t', '--task',
+                        help='Nazev odevzdavane ulohy')
+    parser.add_argument('-c', '--create',
+                        help='Vytvoreni identifikacniho souboru [only|yes]', default='none')
 
     argv = parser.parse_args()
 
@@ -138,8 +145,8 @@ if __name__ == '__main__':
         task = argv.task
         directory = argv.directory
 
-        if os.path.isfile(path_to_script+'/identity.pck'):
-            with open(path_to_script+'/identity.pck') as f:
+        if os.path.isfile(path_to_script + '/identity.pck'):
+            with open(path_to_script + '/identity.pck') as f:
                 data = pickle.load(f)
                 login = data['login']
                 password = data['password']
@@ -149,7 +156,3 @@ if __name__ == '__main__':
             password = argv.password
             app = argv.app
         submit(app, directory, login, password, task)
-
-
-
-
