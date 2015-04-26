@@ -53,8 +53,10 @@ import os.path
 import urllib
 import glob
 import argparse
+import pickle
 
 version = 1 * 1000000 + 1 * 1000 + 0 * 1
+path_to_script = os.path.dirname(os.path.abspath(__file__))
 
 
 def submit(app, dir_name, login, passwd, task):
@@ -99,6 +101,20 @@ def submit(app, dir_name, login, passwd, task):
         f.close()
     return respond
 
+def create_identification_file():
+    """
+
+    :return:
+    """
+    login = raw_input('Zadejte vase uzivatelske jmeno: ')
+    password = raw_input('Zadejte vase heslo: ')
+    app = raw_input('Vase zarazeni [zdo, mpv, ...]: ')
+
+    f = open(path_to_script+'identity.pck', 'wb')
+    data = dict(login=login, password=password, app=app)
+    pickle.dump(data, f)
+    print 'Soubor', path_to_script+'identity.pck', 'byl vyrvoren'
+
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
@@ -107,10 +123,30 @@ if __name__ == '__main__':
     parser.add_argument('-p', '--password', help='Heslo do systemu')
     parser.add_argument('-a', '--app', help='Zarazeni v systemu [zdo, mpv, ...]')
     parser.add_argument('-t', '--task', help='Nazev odevzdavane ulohy')
+    parser.add_argument('-c', '--create', help='Vytvoreni identifikacniho souboru', default=0)
 
     argv = parser.parse_args()
 
-    submit(argv.app, argv.directory, argv.login, argv.password, argv.task)
+    if argv.c == 1:
+        create_identification_file()
+    login = ''
+    password = ''
+    app = ''
+    task = argv.task
+    directory = argv.directory
+
+    if os.path.isfile(path_to_script+'identity.pck'):
+        with open(path_to_script+'identity.pck') as f:
+            data = pickle.load(f)
+            login = data['login']
+            password = data['password']
+            app = data['app']
+    else:
+        login = argv.login
+        password = argv.password
+        app = argv.app
+
+    submit(app, directory, login, password, task)
 
 
 
