@@ -128,8 +128,10 @@ if __name__ == '__main__':
 
     argv = parser.parse_args()
 
+    print argv.create
     if argv.create > 0:
         create_identification_file()
+
     if argv.create != 2:
         login = ''
         password = ''
