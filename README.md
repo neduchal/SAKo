@@ -9,6 +9,14 @@ Klient Systému Automatické Kontroly semestrálních prací
 * Při návratové hodnotě 500 Internal Server Error opakujte pokus o odevzdání.
 * Testováno na Windows 7 a Ubuntu 14.04
 
+ 
+Připravované novinky 
+--------------------
+* Vytvoření identifikačního souboru pro uložení uživatelského jména, hesla a zařazení.
+* Přidání možnosti odevzdávání přímým voláním SAKo.py s parametry.
+* Zrušení třídy directory (nahrazeno globem)
+* Zachování zpětné kompatibility
+
 [Documentace stabilní verze](http://sako.readthedocs.org/cs/v1.0.0/)
 
 
