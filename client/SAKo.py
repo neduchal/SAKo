@@ -112,7 +112,7 @@ def create_identification_file():
 
     f = open(path_to_script+'/identity.pck', 'wb')
     data = dict(login=login, password=password, app=app)
-    pickle.dump(data, f)
+    pickle.dump(data, f, pickle.HIGHEST_PROTOCOL)
     f.close()
     print 'Soubor', path_to_script+'/identity.pck', 'byl vytvoren'
 
