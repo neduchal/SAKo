@@ -128,7 +128,7 @@ if __name__ == '__main__':
 
     argv = parser.parse_args()
 
-    print argv.create
+    print argv.create == 2
     if argv.create > 0:
         create_identification_file()
 

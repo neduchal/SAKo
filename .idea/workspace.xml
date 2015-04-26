@@ -28,7 +28,7 @@
         <entry file="file://$PROJECT_DIR$/client/SAKo.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.3476112" vertical-offset="2649" max-vertical-offset="3564">
-              <caret line="130" column="21" selection-start-line="130" selection-start-column="21" selection-end-line="130" selection-end-column="21" />
+              <caret line="130" column="26" selection-start-line="130" selection-start-column="26" selection-end-line="130" selection-end-column="26" />
               <folding>
                 <element signature="e#992#1001#0" expanded="true" />
               </folding>
@@ -233,7 +233,7 @@
     <entry file="file://$PROJECT_DIR$/client/SAKo.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3476112" vertical-offset="2649" max-vertical-offset="3564">
-          <caret line="130" column="21" selection-start-line="130" selection-start-column="21" selection-end-line="130" selection-end-column="21" />
+          <caret line="130" column="26" selection-start-line="130" selection-start-column="26" selection-end-line="130" selection-end-column="26" />
           <folding>
             <element signature="e#992#1001#0" expanded="true" />
           </folding>
