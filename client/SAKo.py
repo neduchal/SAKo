@@ -95,7 +95,8 @@ def submit(app, dir_name, login, passwd, task):
     else:
         print "Vysledek :"
         print respond
-    f.close()
+    if f is not None:
+        f.close()
     return respond
 
 if __name__ == '__main__':
