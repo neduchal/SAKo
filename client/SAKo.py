@@ -101,11 +101,11 @@ def submit(app, dir_name, login, passwd, task):
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('-d', '--directory', 'Cesta k odevzdavanym souborum, napriklad ./src')
-    parser.add_argument('-l', '--login', 'Login do systemu')
-    parser.add_argument('-p', '--password', 'Heslo do systemu')
-    parser.add_argument('-a', '--app', 'Zarazeni v systemu [zdo, mpv, ...]')
-    parser.add_argument('-t', '--task', 'Nazev odevzdavane ulohy')
+    parser.add_argument('-d', '--directory', help='Cesta k odevzdavanym souborum, napriklad ./src')
+    parser.add_argument('-l', '--login', help='Login do systemu')
+    parser.add_argument('-p', '--password', help='Heslo do systemu')
+    parser.add_argument('-a', '--app', help='Zarazeni v systemu [zdo, mpv, ...]')
+    parser.add_argument('-t', '--task', help='Nazev odevzdavane ulohy')
 
     argv = parser.parse_args()
 
