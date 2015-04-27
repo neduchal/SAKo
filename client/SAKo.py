@@ -151,9 +151,9 @@ if __name__ == '__main__':
     if argv.create != 'only':
         task = argv.task
         directory = argv.directory
-
-        if os.path.isfile(path_to_script + '/' + argv.identity + '.pck'):
-            with open(path_to_script + '/' + argv.identity + '.pck', 'rb') as f:
+        a_id = argv.identity
+        if os.path.isfile(path_to_script + '/' + a_id + '.pck'):
+            with open(path_to_script + '/' + a_id + '.pck', 'rb') as f:
                 data = pickle.load(f)
                 login = data['login']
                 password = data['password']

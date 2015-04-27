@@ -20,8 +20,8 @@ class TestSAKo(unittest.TestCase):
         pass
 
     def test_SAKo(self):
-        os.system('python ' + self.path_to_script + '/SAKo.py -d '
-                  + self.path_to_script +
+        os.system('python ' + self.path_to_script + '/SAKo.py -d ' +
+                  self.path_to_script +
                   '/example -l test -p test1 -a sako_dev -t ping > test.txt')
         p_f = open('test.txt', 'r')
         text = p_f.read()[-4:-2]
