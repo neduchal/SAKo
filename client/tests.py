@@ -28,7 +28,7 @@ class TestSAKo(unittest.TestCase):
 
     def test_identity(self):
         sys.stdin = open(self.path_to_script + '/tests/identity.txt', 'r')
-        result = SAKo.create_identification_file()
+        result = SAKo.create_identification_file('identity')
         self.assert_(result == 1)
 
     def test_submit(self):
