@@ -114,7 +114,7 @@ def create_identification_file(identity):
     p_app = raw_input('Vase zarazeni [zdo, mpv, ...]: ')
 
     try:
-        p_f = open(path_to_script + '/'+ identity + '.pck', 'wb')
+        p_f = open(path_to_script + '/' + identity + '.pck', 'wb')
         p_data = dict(login=p_login, password=p_password, app=p_app)
         pickle.dump(p_data, p_f, pickle.HIGHEST_PROTOCOL)
         p_f.close()
@@ -152,8 +152,8 @@ if __name__ == '__main__':
         task = argv.task
         directory = argv.directory
 
-        if os.path.isfile(path_to_script + '/'+ argv.identity + '.pck'):
-            with open(path_to_script + '/'+ argv.identity + '.pck', 'rb') as f:
+        if os.path.isfile(path_to_script + '/' + argv.identity + '.pck'):
+            with open(path_to_script + '/' + argv.identity + '.pck', 'rb') as f:
                 data = pickle.load(f)
                 login = data['login']
                 password = data['password']
