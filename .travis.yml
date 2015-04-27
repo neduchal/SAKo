@@ -12,8 +12,8 @@ install:
 # command to run tests
 
 script: 
- - pep8 ./client/ --ignore=E402
- - nosetests --with-coverage ./client/tests/
+ - pep8 ./client/
+ - nosetests --with-coverage ./client/
 
 after_success:
   coveralls

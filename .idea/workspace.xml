@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="98bd0994-f677-4594-8f3c-57a335f1720e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/SAKo.py" afterPath="$PROJECT_DIR$/client/SAKo.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/tests.py" afterPath="$PROJECT_DIR$/client/tests.py" />
-    </list>
+    <list default="true" id="98bd0994-f677-4594-8f3c-57a335f1720e" name="Default" comment="" />
     <ignored path="sako.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,10 +36,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tests.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="tests.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5609756" vertical-offset="28" max-vertical-offset="900">
+            <state vertical-scroll-proportion="0.0" vertical-offset="28" max-vertical-offset="900">
               <caret line="22" column="68" selection-start-line="22" selection-start-column="68" selection-end-line="22" selection-end-column="68" />
               <folding>
                 <element signature="e#103#118#0" expanded="true" />
@@ -51,10 +48,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="identity.txt" pinned="false" current-in-tab="false">
+      <file leaf-file-name="identity.txt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/tests/identity.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="144">
+            <state vertical-scroll-proportion="0.05487805" vertical-offset="0" max-vertical-offset="656">
               <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
               <folding />
             </state>
@@ -448,14 +445,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/tests/identity.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="144">
-          <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/SAKo.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2368" max-vertical-offset="3078">
@@ -468,11 +457,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5609756" vertical-offset="28" max-vertical-offset="900">
+        <state vertical-scroll-proportion="0.0" vertical-offset="28" max-vertical-offset="900">
           <caret line="22" column="68" selection-start-line="22" selection-start-column="68" selection-end-line="22" selection-end-column="68" />
           <folding>
             <element signature="e#103#118#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/tests/identity.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.05487805" vertical-offset="0" max-vertical-offset="656">
+          <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>
