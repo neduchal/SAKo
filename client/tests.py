@@ -1,9 +1,6 @@
 #! /usr/bin/python
 # -*- coding: utf-8 -*-
 
-__author__ = "neduchal"
-__date__ = "$17.3.2015 13:37:46$"
-
 import unittest
 import os.path
 import sys
