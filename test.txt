@@ -1,0 +1,11 @@
+Oteviram soubor : /home/neduchal/Dokumenty/projekty/git/SAKo/client/example/test_func.py
+Oteviram soubor : /home/neduchal/Dokumenty/projekty/git/SAKo/client/example/test.py
+Oteviram soubor : /home/neduchal/Dokumenty/projekty/git/SAKo/client/example/test_func.pyc
+Komunikace se serverem...
+Vysledek :
+Ping
+====
+
+
+OK
+

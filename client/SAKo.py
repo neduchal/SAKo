@@ -59,66 +59,72 @@ version = 1 * 1000000 + 1 * 1000 + 0 * 1
 path_to_script = os.path.dirname(os.path.abspath(__file__))
 
 
-def submit(app, dir_name, login, passwd, task):
-    """Funkce pro odevzdání úlohy na server.
+def submit(p_app, p_dir_name, p_login, p_passwd, p_task):
+    """
+        Funkce pro odevzdání úlohy na server.
 
-       :param app: Aplikace do které je kód odevzdáván.
-       :type app: str.
+        :param p_app: Aplikace do které je kód odevzdáván.
+        :type p_app: str.
 
-       :param dir_name:  Složka s odevzdávanými soubory.
-       :type dir_name: str.
-       :param login:  Login do systému SAKo.
-       :type login: str.
-       :param passwd:  Heslo do systému SAKo.
-       :type passwd: str.
-       :param task:  Název odevzdávané úlohy.
-       :type task: str.
+        :param p_dir_name:  Složka s odevzdávanými soubory.
+        :type p_dir_name: str.
+        :param p_login:  Login do systému SAKo.
+        :type p_login: str.
+        :param p_passwd:  Heslo do systému SAKo.
+        :type p_passwd: str.
+        :param p_task:  Název odevzdávané úlohy.
+        :type p_task: str.
+
 
     """
-    f = None
-    url = 'http://147.228.124.51/' + app + '/'
-    if dir_name[-1:] == '/':
-        dir_name = dir_name[:-1]
-    files = glob.glob(dir_name + '/*.*')
-    data = dict(login=login, password=passwd, task=task, version=version)
+    p_f = None
+    url = 'http://147.228.124.51/' + p_app + '/'
+    if p_dir_name[-1:] == '/':
+        p_dir_name = p_dir_name[:-1]
+    files = glob.glob(p_dir_name + '/*.*')
+    p_data = dict(login=p_login, password=p_passwd, task=p_task, version=version)
     for i in range(len(files)):
         filename = files[i]
         print 'Oteviram soubor : ' + filename
-        f = open(filename, 'rb')
-        filebody = f.read()
-        data['name' + str(i)] = filename
-        data['file' + str(i)] = filebody
-    print "Komunikace se serverem..."
-    u = urllib.urlopen(url, urllib.urlencode(data))
+        p_f = open(filename, 'rb')
+        file_data = p_f.read()
+        p_data['name' + str(i)] = filename
+        p_data['file' + str(i)] = file_data
+    print 'Komunikace se serverem...'
+    u = urllib.urlopen(url, urllib.urlencode(p_data))
     respond = u.read()
     if respond[0:9] == 'actualize':
         urllib.urlretrieve(respond[11:], os.path.abspath(__file__))
-        print "Klient byl aktualizovan. Provedte novy pokus o odevzdani"
+        print 'Klient byl aktualizovan. Provedte novy pokus o odevzdani'
     else:
         print "Vysledek :"
         print respond
-    if f is not None:
-        f.close()
+    if p_f is not None:
+        p_f.close()
     return respond
 
 
 def create_identification_file():
     """
-
-    :return:
+        Interaktivni vytvoreni identifikacniho souboru
     """
-    login = raw_input('Zadejte vase uzivatelske jmeno: ')
-    password = raw_input('Zadejte vase heslo: ')
-    app = raw_input('Vase zarazeni [zdo, mpv, ...]: ')
+    p_login = raw_input('Zadejte vase uzivatelske jmeno: ')
+    p_password = raw_input('Zadejte vase heslo: ')
+    p_app = raw_input('Vase zarazeni [zdo, mpv, ...]: ')
 
-    f = open(path_to_script + '/identity.pck', 'wb')
-    data = dict(login=login, password=password, app=app)
-    pickle.dump(data, f, pickle.HIGHEST_PROTOCOL)
-    f.close()
+    try:
+        p_f = open(path_to_script + '/identity.pck', 'wb')
+        p_data = dict(login=p_login, password=p_password, app=p_app)
+        pickle.dump(p_data, p_f, pickle.HIGHEST_PROTOCOL)
+        p_f.close()
+    except IOError as e:
+        print 'I/O error ({0}): {1}'.format(e.errno, e.strerror)
+        return 0
     print 'Soubor', path_to_script + '/identity.pck', 'byl vytvoren'
+    return 1
+
 
 if __name__ == '__main__':
-
     parser = argparse.ArgumentParser()
     parser.add_argument('-d', '--directory',
                         help='Cesta k odevzdavanym souborum [./src]')
@@ -140,9 +146,6 @@ if __name__ == '__main__':
         create_identification_file()
 
     if argv.create != 'only':
-        login = ''
-        password = ''
-        app = ''
         task = argv.task
         directory = argv.directory
 
