@@ -82,7 +82,8 @@ def submit(p_app, p_dir_name, p_login, p_passwd, p_task):
     if p_dir_name[-1:] == '/':
         p_dir_name = p_dir_name[:-1]
     files = glob.glob(p_dir_name + '/*.*')
-    p_data = dict(login=p_login, password=p_passwd, task=p_task, version=version)
+    p_data = dict(login=p_login, password=p_passwd,
+                  task=p_task, version=version)
     for i in range(len(files)):
         filename = files[i]
         print 'Oteviram soubor : ' + filename
@@ -104,7 +105,7 @@ def submit(p_app, p_dir_name, p_login, p_passwd, p_task):
     return respond
 
 
-def create_identification_file():
+def create_identification_file(identity):
     """
         Interaktivni vytvoreni identifikacniho souboru
     """
@@ -113,7 +114,7 @@ def create_identification_file():
     p_app = raw_input('Vase zarazeni [zdo, mpv, ...]: ')
 
     try:
-        p_f = open(path_to_script + '/identity.pck', 'wb')
+        p_f = open(path_to_script + '/'+ identity + '.pck', 'wb')
         p_data = dict(login=p_login, password=p_password, app=p_app)
         pickle.dump(p_data, p_f, pickle.HIGHEST_PROTOCOL)
         p_f.close()
@@ -139,18 +140,20 @@ if __name__ == '__main__':
     parser.add_argument('-c', '--create',
                         help='Vytvoreni identifikacniho souboru [only|yes]',
                         default='none')
+    parser.add_argument('-i', '--identity', help='Soubor s identitou',
+                        default='identity.pck')
 
     argv = parser.parse_args()
 
     if argv.create != 'none':
-        create_identification_file()
+        create_identification_file(argv.identity)
 
     if argv.create != 'only':
         task = argv.task
         directory = argv.directory
 
-        if os.path.isfile(path_to_script + '/identity.pck'):
-            with open(path_to_script + '/identity.pck') as f:
+        if os.path.isfile(path_to_script + '/'+ argv.identity + '.pck'):
+            with open(path_to_script + '/'+ argv.identity + '.pck', 'rb') as f:
                 data = pickle.load(f)
                 login = data['login']
                 password = data['password']
