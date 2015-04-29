@@ -30,7 +30,6 @@ class TestSAKo(unittest.TestCase):
     def test_submitDirWithSlash(self):
         result = SAKo.submit('sako_dev', self.path_to_script + '/example/',
                              'test', 'test1', 'ping')
-
         self.assert_(result[-3:-1] == "OK")
 
 if __name__ == "__main__":

@@ -141,7 +141,7 @@ if __name__ == '__main__':
                         help='Vytvoreni identifikacniho souboru [only|yes]',
                         default='none')
     parser.add_argument('-i', '--identity', help='Soubor s identitou',
-                        default='identity.pck')
+                        default='identity')
 
     argv = parser.parse_args()
 
@@ -152,6 +152,7 @@ if __name__ == '__main__':
         task = argv.task
         directory = argv.directory
         a_id = argv.identity
+        print path_to_script + '/' + a_id + '.pck'
         if os.path.isfile(path_to_script + '/' + a_id + '.pck'):
             with open(path_to_script + '/' + a_id + '.pck', 'rb') as f:
                 data = pickle.load(f)
