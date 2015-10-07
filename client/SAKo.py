@@ -26,15 +26,13 @@ Do něj pak vložte následující kód.
 
 **Význam jednotlivých parametrů**
 
-*"zdo"* - Aplikace, do které odevzdáváte (zdo/mpv
-
 *"./src/"* - Relativní cesta ke složce s odevzdávanými soubory
 
 *"login"* - Váš login do systému SAKo
 
 *"heslo"* - Vaše heslo do systému SAKo
 
-*"copy"* - Odevzdávaná úloha. Úloha copy pouze nahraje soubory na server.
+*"uloha"* - Odevzdávaná úloha.
 
 **Samotný kód**
 
@@ -43,7 +41,7 @@ Do něj pak vložte následující kód.
     #! /usr/bin/python
     # -*- coding: utf-8 -*-
     import SAKo
-    SAKo.submit("zdo", "./src/", "login", "heslo", "copy")
+    SAKo.submit("./src/", "login", "heslo", "uloha")
 
 """
 
