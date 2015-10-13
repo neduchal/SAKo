@@ -95,7 +95,7 @@ def submit(p_dir_name, p_login, p_passwd, p_task):
             print 'Oteviram soubor : ' + filename
             p_f = open(filename, 'rb')
             file_data = p_f.read()
-            p_data['name' + str(i)] = filename
+            p_data['name' + str(i)] = filename.replace('\\','\\\\').split('\\')[-1].split('/')[-1]
             p_data['file' + str(i)] = file_data
         print 'Komunikace se serverem...'
         u = urllib.urlopen(url, urllib.urlencode(p_data))
