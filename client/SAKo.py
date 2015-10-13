@@ -51,7 +51,7 @@ import os.path
 import urllib
 import glob
 
-version = 1 * 1000000 + 1 * 1000 + 0 * 1
+version = 1 * 1000000 + 1 * 1000 + 1 * 1
 path_to_script = os.path.dirname(os.path.abspath(__file__))
 
 
