@@ -46,14 +46,22 @@ Do něj pak vložte následující kód.
 """
 
 # Imports
+import sys
 import os
 import os.path
-import urllib
 import glob
 
-version = 1 * 1000000 + 1 * 1000 + 1 * 1
-path_to_script = os.path.dirname(os.path.abspath(__file__))
+if sys.version_info.major == 2:
+    from urllib import urlopen
+    from urllib import urlretrieve
+    from urllib import urlencode
+else:
+    from urllib.request import urlopen
+    from urllib.request import urlretrieve
+    from urllib.parse import urlencode
 
+version = 1 * 1000000 + 1 * 1000 + 1 * 2
+path_to_script = os.path.dirname(os.path.abspath(__file__))
 
 def submit(p_dir_name, p_login, p_passwd, p_task):
     """
@@ -78,34 +86,40 @@ def submit(p_dir_name, p_login, p_passwd, p_task):
 
     p_data = dict(login=p_login, password=p_passwd,
                   task=p_task, version=version, ticket='')
-    u = urllib.urlopen(url, urllib.urlencode(p_data))
+    data = urlencode(p_data)
+    if sys.version_info.major == 3:
+        data = data.encode('utf-8')
+    u = urlopen(url, data)
     respond = u.read().strip()
 
     if respond[0:3] == '0##':
-        print 'Nepodarilo se ziskat listek'
+        print('Nepodarilo se ziskat listek')
     elif len(respond) == 0:
-        print 'Server neodpovida'
+        print('Server neodpovida')
     elif respond[0:9] == 'actualize':
-        urllib.urlretrieve(respond[11:], os.path.abspath(__file__))
-        print 'Klient byl aktualizovan. Provedte novy pokus o odevzdani'
+        urlretrieve(respond[11:], os.path.abspath(__file__))
+        print('Klient byl aktualizovan. Provedte novy pokus o odevzdani')
     else:
         p_data['ticket'] = respond
         for i in range(len(files)):
             filename = files[i]
-            print 'Oteviram soubor : ' + filename
+            print('Oteviram soubor : ' + filename)
             p_f = open(filename, 'rb')
             file_data = p_f.read()
             p_data['name' + str(i)] = filename.replace('\\','\\\\').split('\\')[-1].split('/')[-1]
             p_data['file' + str(i)] = file_data
-        print 'Komunikace se serverem...'
-        u = urllib.urlopen(url, urllib.urlencode(p_data))
+        print('Komunikace se serverem...')
+        data = urlencode(p_data)
+        if sys.version_info.major == 3:
+            data = data.encode('utf-8')
+        u = urlopen(url, data)
         respond = u.read().strip()
         if respond[0:3] == '0##':
-            print "Chyba : "
-            print respond[3:]
+            print("Chyba : ")
+            print(respond[3:])
         else:
-            print "Vysledek :"
-            print respond
+            print("Vysledek :")
+            print(respond)
         if p_f is not None:
             p_f.close()
     return respond
