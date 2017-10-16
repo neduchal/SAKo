@@ -76,7 +76,6 @@ def submit(p_dir_name, p_login, p_passwd, p_task):
         :param p_task:  Název odevzdávané úlohy.
         :type p_task: str.
 
-
     """
     p_f = None
     url = 'http://147.228.124.51/sako/'
@@ -91,7 +90,8 @@ def submit(p_dir_name, p_login, p_passwd, p_task):
         data = data.encode('utf-8')
     u = urlopen(url, data)
     respond = u.read().strip()
-
+    if sys.version_info.major == 3:
+        respond = respond.decode('utf-8')
     if respond[0:3] == '0##':
         print('Nepodarilo se ziskat listek')
     elif len(respond) == 0:
@@ -114,6 +114,8 @@ def submit(p_dir_name, p_login, p_passwd, p_task):
             data = data.encode('utf-8')
         u = urlopen(url, data)
         respond = u.read().strip()
+        if sys.version_info.major == 3:
+            respond = respond.decode('utf-8')
         if respond[0:3] == '0##':
             print("Chyba : ")
             print(respond[3:])
