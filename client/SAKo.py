@@ -60,7 +60,7 @@ else:
     from urllib.request import urlretrieve
     from urllib.parse import urlencode
 
-version = 1 * 1000000 + 1 * 1000 + 1 * 2
+version = 1 * 1000000 + 2 * 1000 + 0 * 1
 path_to_script = os.path.dirname(os.path.abspath(__file__))
 
 def submit(p_dir_name, p_login, p_passwd, p_task):
